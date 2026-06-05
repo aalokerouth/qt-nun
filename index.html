@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For My Favorite Person ??</title>
+<title>For My Favorite Person ❤️</title>
 
 <style>
 * {
@@ -119,62 +119,62 @@ button {
 <body>
 
 <div id="screen1" class="card">
-    <div class="emoji-header">??</div>
+    <div class="emoji-header">🥺</div>
     <h2>Rag kole achis?</h2>
     <p>I know you're mad, but please be honest...</p>
 
     <div class="btn-container">
-        <button class="btn-yes" onclick="goToScreen2()">No ??</button>
+        <button class="btn-yes" onclick="goToScreen2()">No 😇</button>
 
         <button class="btn-no"
             id="yesBtn"
             ontouchstart="moveYesButton(event)"
             onmouseover="moveYesButton(event)"
             onclick="moveYesButton(event)">
-            Yes ??
+            Yes 😈
         </button>
     </div>
 </div>
 
 <div id="screen2" class="card hidden">
-    <div class="emoji-header">??</div>
+    <div class="emoji-header">🥰</div>
     <h2>Choo Sweet!</h2>
-    <p>Now tell me what you want to eat ??</p>
+    <p>Now tell me what you want to eat ❤️</p>
 
     <div class="options-list">
-        <button class="option-btn" onclick="goToScreen3('?? Mix Noodles')">?? Mix Noodles</button>
-        <button class="option-btn" onclick="goToScreen3('?? Crispy Fish Fries')">?? Crispy Fish Fries</button>
-        <button class="option-btn" onclick="goToScreen3('?? Pizza')">?? Pizza</button>
-        <button class="option-btn" onclick="goToScreen3('?? Burger & Fries')">?? Burger</button>
-        <button class="option-btn" onclick="goToScreen3('?? Ice Cream')">?? Ice Cream</button>
+        <button class="option-btn" onclick="goToScreen3('🍜 Mix Noodles')">🍜 Mix Noodles</button>
+        <button class="option-btn" onclick="goToScreen3('🐟 Crispy Fish Fries')">🐟 Crispy Fish Fries</button>
+        <button class="option-btn" onclick="goToScreen3('🍕 Pizza')">🍕 Pizza</button>
+        <button class="option-btn" onclick="goToScreen3('🍔 Burger & Fries')">🍔 Burger</button>
+        <button class="option-btn" onclick="goToScreen3('🍨 Ice Cream')">🍨 Ice Cream</button>
     </div>
 </div>
 
 <div id="screen3" class="card hidden">
-    <div class="emoji-header">??</div>
+    <div class="emoji-header">👑</div>
     <h2>Food Locked In!</h2>
 
-    <p>Pick my punishment ??</p>
+    <p>Pick my punishment 😅</p>
 
     <div class="options-list">
-        <button class="option-btn" onclick="goToFinalScreen('?? Khub Ador')">?? Khub Ador</button>
-        <button class="option-btn" onclick="goToFinalScreen('????? Massage')">????? Massage</button>
-        <button class="option-btn" onclick="goToFinalScreen('?? Listen to everything')">?? Listen to me</button>
-        <button class="option-btn" onclick="goToFinalScreen('?? Ice Cream Treat')">?? Ice Cream</button>
+        <button class="option-btn" onclick="goToFinalScreen('💖 Khub Ador')">💖 Khub Ador</button>
+        <button class="option-btn" onclick="goToFinalScreen('💆‍♂️ Massage')">💆‍♂️ Massage</button>
+        <button class="option-btn" onclick="goToFinalScreen('🤫 Listen to everything')">🤫 Listen to me</button>
+        <button class="option-btn" onclick="goToFinalScreen('🍦 Ice Cream Treat')">🍦 Ice Cream</button>
     </div>
 </div>
 
 <div id="screen4" class="card hidden">
-    <div class="emoji-header">??</div>
+    <div class="emoji-header">💖</div>
     <h2>Mission Accomplished!</h2>
 
     <div class="certificate">
-        <h3 style="color:#ff4d6d;">Love Certificate ??</h3>
+        <h3 style="color:#ff4d6d;">Love Certificate ❤️</h3>
         <p id="summaryText"></p>
 
-        <p><strong>Your puku is officially on pamper duty ??</strong></p>
+        <p><strong>Your puku is officially on pamper duty 🥰</strong></p>
 
-        <div style="font-size:40px;">?? ?? ??</div>
+        <div style="font-size:40px;">❤️ 🌹 ❤️</div>
     </div>
 </div>
 
@@ -236,7 +236,7 @@ function moveYesButton(event) {
     btn.style.left = newX + "px";
     btn.style.top = newY + "px";
 
-    btn.innerText = funnyTexts[textIndex % funnyTexts.length] + " ??";
+    btn.innerText = funnyTexts[textIndex % funnyTexts.length] + " 😈";
     textIndex++;
 }
 
@@ -256,9 +256,9 @@ function goToFinalScreen(punishment) {
     document.getElementById('screen4').classList.remove('hidden');
 
     document.getElementById('summaryText').innerHTML = `
-        ??? <strong>Food:</strong> ${chosenFood}<br><br>
-        ?? <strong>Punishment:</strong> ${punishment}<br><br>
-        ?? <strong>Date:</strong> ${new Date().toLocaleDateString()}
+        🍽️ <strong>Food:</strong> ${chosenFood}<br><br>
+        🎁 <strong>Punishment:</strong> ${punishment}<br><br>
+        📅 <strong>Date:</strong> ${new Date().toLocaleDateString()}
     `;
 
     setTimeout(downloadFinalCard, 1000);
@@ -287,7 +287,7 @@ function createHearts() {
     for (let i = 0; i < 20; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
-        heart.innerHTML = "??";
+        heart.innerHTML = "❤️";
 
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = (4 + Math.random() * 5) + "s";
