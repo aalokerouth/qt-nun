@@ -158,8 +158,8 @@ textarea:focus { border-color: #ff4d6d; }
     padding: 15px;
     border-radius: 12px;
     line-height: 1.6;
-    animation: fadeIn 0.5s ease;
     color: #333;
+    min-height: 120px;
 }
 
 .warning-msg {
@@ -197,14 +197,27 @@ textarea:focus { border-color: #ff4d6d; }
     animation: particleExplode 0.6s ease-out forwards;
 }
 
+/* Yehh Text Explosion Style */
+.yehh-blast {
+    position: absolute;
+    color: #ff4d6d;
+    font-weight: 900;
+    font-size: 28px;
+    text-shadow: 2px 2px 0px #fff;
+    pointer-events: none;
+    z-index: 100;
+    animation: yehhFlyUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes yehhFlyUp {
+    0% { transform: translate(-50%, -50%) scale(0.3) rotate(-20deg); opacity: 0; }
+    30% { transform: translate(-50%, -100px) scale(1.3) rotate(10deg); opacity: 1; }
+    100% { transform: translate(-50%, -160px) scale(1) rotate(0deg); opacity: 0; }
+}
+
 @keyframes particleExplode {
     0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
     100% { transform: translate(var(--twx), var(--twy)) scale(1.4); opacity: 0; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 </style>
@@ -223,7 +236,7 @@ textarea:focus { border-color: #ff4d6d; }
         <h2>🥺 Rag kole achis?</h2>
 
         <div class="btn-container">
-            <button class="btn-yes" onclick="go2()">Ekdm Na😇</button>
+            <button class="btn-yes" onclick="go2(event)">Ekdm Na😇</button>
 
             <button class="btn-no" id="yesBtn"
                 style="left: 160px; top: 0px;"
@@ -291,7 +304,7 @@ let textIndex = 0;
 
 const yesTexts = ["Yes😠","Chotti?","Pabbi na dhotte😜","Thakte pabbina😂","Dhole dekha😏"];
 
-// Built-in Synth Sound Effects Generator (No asset dependencies)
+// Built-in Synth Sound Effects Generator
 let audioCtx = null;
 function playSound(type) {
     try {
@@ -315,7 +328,6 @@ function playSound(type) {
             gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
             osc.start(); osc.stop(audioCtx.currentTime + 0.2);
         } else if (type === 'win') {
-            // Sweet little final happy fanfare
             [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
                 let o = audioCtx.createOscillator();
                 let g = audioCtx.createGain();
@@ -323,14 +335,12 @@ function playSound(type) {
                 o.frequency.setValueAtTime(f, audioCtx.currentTime + (idx * 0.1));
                 g.gain.setValueAtTime(0.1, audioCtx.currentTime + (idx * 0.1));
                 g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + (idx * 0.1) + 0.3);
-                o.start(audioCtx.currentTime + (idx * 0.1));
-                o.stop(audioCtx.currentTime + (idx * 0.1) + 0.3);
+                o.start(o.currentTime); o.stop(audioCtx.currentTime + (idx * 0.1) + 0.3);
             });
         }
     } catch(e) {}
 }
 
-// Sparkle Burst Particle System on Click
 function spawnParticles(e, emoji) {
     const targetEmoji = emoji || '❤️';
     for(let i=0; i<6; i++) {
@@ -350,7 +360,7 @@ function spawnParticles(e, emoji) {
     }
 }
 
-// Ambient Floating Elements Background
+// Ambient Floating Background System
 const expressions = ['❤️', '💖', '✨', '🌸', '🍕', '🍦'];
 setInterval(() => {
     const heart = document.createElement('div');
@@ -381,10 +391,18 @@ function updateProgress(percent) {
     document.getElementById("pBar").style.width = percent + "%";
 }
 
-function go2(){
+function go2(e){
     playSound('transition');
     
-    // Yahoo Confetti Blast effect triggers instantly on click
+    // Yehh !! text pop-up creation
+    let el = document.createElement('div');
+    el.classList.add('yehh-blast');
+    el.innerText = "Yehh !! 🎉";
+    el.style.left = (e.clientX || window.innerWidth / 2) + 'px';
+    el.style.top = (e.clientY || window.innerHeight / 2) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1200);
+
     confetti({
         particleCount: 100,
         spread: 70,
@@ -434,6 +452,37 @@ function go4(){
     }, 2000);
 }
 
+// Typing engine configuration to process elements character by character smoothly
+function typeHTML(element, htmlText, delay, callback) {
+    let currentText = "";
+    let i = 0;
+    let inTag = false;
+
+    function step() {
+        if (i >= htmlText.length) {
+            if(callback) callback();
+            return;
+        }
+        
+        let char = htmlText[i];
+        if (char === '<') inTag = true;
+        
+        currentText += char;
+        
+        if (char === '>') inTag = false;
+        
+        element.innerHTML = currentText;
+        i++;
+        
+        if (inTag) {
+            step(); 
+        } else {
+            setTimeout(step, delay);
+        }
+    }
+    step();
+}
+
 function final(){
     let msg = document.getElementById("msg").value;
     playSound('transition');
@@ -443,16 +492,26 @@ function final(){
         s5.classList.remove("hidden");
         updateProgress(100);
 
-        document.getElementById("result").innerHTML = `
-        <div class="warning-msg">😏 Ebarer moto chere dilam, porer bar kore dekh</div>
+        // Raw HTML blueprint target formatted specifically for the typewriter loop
+        const finalHTML = `
+            <div class="warning-msg">😏 Ebarer moto chere dilam, porer bar kore dekh</div>
             🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
             😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
             💌 <b>Message:</b> ${msg || "No message 😭"}
         `;
 
+        const resultContainer = document.getElementById("result");
+        resultContainer.innerHTML = ""; 
+
+        // Typewriter runs smoothly, triggering high-fidelity download generation once complete
+        typeHTML(resultContainer, finalHTML, 15, () => {
+            setTimeout(() => {
+                downloadCard();
+            }, 500);
+        });
+
         playSound('win');
 
-        // Celebratory final card explosion effect!
         let duration = 2 * 1000;
         let end = Date.now() + duration;
 
@@ -476,12 +535,6 @@ function final(){
             requestAnimationFrame(frame);
           }
         }());
-
-        // Automated download triggers beautifully right after elements settle
-        setTimeout(() => {
-            downloadCard();
-        }, 600);
-
     }, 3000);
 }
 
