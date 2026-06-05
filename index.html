@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amar sona puku ??</title>
+<title>Amar sona puku ❤️</title>
 
-<!-- Included Canvas Confetti Library for the final Magic Card screen -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
 * { box-sizing: border-box; }
@@ -124,15 +124,30 @@ textarea:focus { border-color: #ff4d6d; }
     width: 100%;
 }
 
+/* Specific styling for the card area that will be converted to a PNG image */
+#downloadable-card-area {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    border: 2px dashed #ffb3c1;
+    margin-top: 15px;
+}
+
 #result {
     text-align: left;
     background: #fff0f3;
     padding: 15px;
     border-radius: 12px;
-    border: 2px dashed #ffb3c1;
-    margin-top: 15px;
     line-height: 1.6;
     animation: fadeIn 0.5s ease;
+    color: #333;
+}
+
+.download-btn {
+    margin-top: 15px;
+    background: #28a745;
+    color: white;
+    width: 100%;
 }
 
 @keyframes fadeIn {
@@ -145,65 +160,63 @@ textarea:focus { border-color: #ff4d6d; }
 
 <body>
 
-<!-- SCREEN 1 -->
 <div id="s1" class="card">
-    <h2>?? Rag kole achis?</h2>
+    <h2>🥺 Rag kole achis?</h2>
 
     <div class="btn-container">
-        <button class="btn-yes" onclick="go2()">Ekdm Na??</button>
+        <button class="btn-yes" onclick="go2()">Ekdm Na😇</button>
 
         <button class="btn-no" id="yesBtn"
             style="left: 160px; top: 0px;"
             ontouchstart="runAway(event)"
             onmouseover="runAway(event)">
-            Yes ??
+            Yes 😈
         </button>
     </div>
 </div>
 
-<!-- SCREEN 2 FOOD -->
 <div id="s2" class="card hidden">
-    <h2>???Ki khaba Bachu</h2>
+    <h2>🍽️Ki khaba Bachu</h2>
 
     <p id="reaction"></p>
 
     <div>
-        <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke')">Fish Fry Khabi? ??</button>
-        <button class="option-btn" onclick="food('?? Chow and Mau','Yummy noodles ??')">Mix Schezwuan Chow ??</button>
-        <button class="option-btn" onclick="food('?? Burgir','Cholo kheye achi????')">Burgir Khaba ??</button>
-        <button class="option-btn" onclick="food('?? Ice Cream hmmm','Paisa kom ache but tomar jonno sob??')">Arun kakur Ice cream? ??</button>
-        <button class="option-btn" onclick="food('?? Paisar ovab??','Tomar jonno sob kichu bachhu')">Sob ??</button>
+        <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke')">Fish Fry Khabi? 🐟</button>
+        <button class="option-btn" onclick="food('🍜 Chow and Mau','Yummy noodles 😋')">Mix Schezwuan Chow 🍜</button>
+        <button class="option-btn" onclick="food('🍔 Burgir','Cholo kheye achi🍔🔥')">Burgir Khaba 🥹</button>
+        <button class="option-btn" onclick="food('🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')">Arun kakur Ice cream? 🍨</button>
+        <button class="option-btn" onclick="food('😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')">Sob 😡</button>
     </div>
 </div>
 
-<!-- SCREEN 3 PUNISHMENT -->
 <div id="s3" class="card hidden">
-    <h2>?? Pick punishments (Ekta ba Duto ba Tinte)</h2>
+    <h2>😏 Pick punishments (Ekta ba Duto ba Tinte)</h2>
 
-    <button class="option-btn" onclick="toggle(this,'Puku ???????')">Puku massage ?????????</button>
-    <button class="option-btn" onclick="toggle(this,'Full body Kissu ??')">Full body Kiss ??</button>
-    <button class="option-btn" onclick="toggle(this,'Back Massage 15 min??')">Back Massage ??15 min</button>
-    <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream ??</button>
-    <button class="option-btn" onclick="toggle(this,'Queen Treatment??')">Rani Treatment??</button>
-    <button class="option-btn" onclick="toggle(this,'Bike chalano sekha???')">Bike chalano sekha???</button>
+    <button class="option-btn" onclick="toggle(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
+    <button class="option-btn" onclick="toggle(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
+    <button class="option-btn" onclick="toggle(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
+    <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
+    <button class="option-btn" onclick="toggle(this,'Queen Treatment👑')">Rani Treatment👑</button>
+    <button class="option-btn" onclick="toggle(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
 
-    <button class="next-btn" onclick="go4()">Next ??</button>
+    <button class="next-btn" onclick="go4()">Next ➡️</button>
 </div>
 
-<!-- SCREEN 4 CUSTOM -->
 <div id="s4" class="card hidden">
-    <h2>?? Ar kichu bacha ???</h2>
+    <h2>💌 Ar kichu bacha 🫠?</h2>
 
     <textarea id="msg" placeholder="lekho ekhane...."></textarea>
 
-    <button class="next-btn" onclick="final()">Magic Card ??</button>
+    <button class="next-btn" onclick="final()">Magic Card 💖</button>
 </div>
 
-<!-- SCREEN 5 CARD -->
 <div id="s5" class="card hidden">
-    <h2>?? Labuu Card</h2>
+    <div id="downloadable-card-area">
+        <h2 style="margin-top:0;">💖 Labuu Card</h2>
+        <div id="result"></div>
+    </div>
 
-    <div id="result"></div>
+    <button class="download-btn" onclick="downloadCard()">Download Card (PNG) 📸</button>
 </div>
 
 <script>
@@ -211,10 +224,10 @@ let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
 
-const yesTexts = ["Yes??","Chotti?","Pabbi na dhotte??","Thakte pabbina??","Dhole dekha??"];
+const yesTexts = ["Yes😠","Chotti?","Pabbi na dhotte😜","Thakte pabbina😂","Dhole dekha😏"];
 
-// Dynamic Ambient Floating Background System
-const expressions = ['??', '??', '?', '??', '??', '??'];
+// Ambient Floating Elements Background
+const expressions = ['❤️', '💖', '✨', '🌸', '🍕', '🍦'];
 setInterval(() => {
     const heart = document.createElement('div');
     heart.classList.add('heart-bg');
@@ -240,18 +253,22 @@ function runAway(e){
 }
 
 function go2(){
-    s1.classList.add("hidden");
-    s2.classList.remove("hidden");
+    // 3 Second delay when moving from Screen 1 to Screen 2
+    setTimeout(() => {
+        s1.classList.add("hidden");
+        s2.classList.remove("hidden");
+    }, 1000);
 }
 
 function food(f,t){
     foodChosen = f;
     document.getElementById("reaction").innerText = t;
 
+    // 3 Second delay when moving from Screen 2 to Screen 3
     setTimeout(()=>{
         s2.classList.add("hidden");
         s3.classList.remove("hidden");
-    },800);
+    }, 3000);
 }
 
 function toggle(el,val){
@@ -265,46 +282,67 @@ function toggle(el,val){
 }
 
 function go4(){
-    s3.classList.add("hidden");
-    s4.classList.remove("hidden");
+    // 3 Second delay when moving from Screen 3 to Screen 4
+    setTimeout(() => {
+        s3.classList.add("hidden");
+        s4.classList.remove("hidden");
+    }, 1000);
 }
 
 function final(){
     let msg = document.getElementById("msg").value;
 
-    s4.classList.add("hidden");
-    s5.classList.remove("hidden");
+    // 3 Second delay when moving from Screen 4 to final Screen 5
+    setTimeout(() => {
+        s4.classList.add("hidden");
+        s5.classList.remove("hidden");
 
-    document.getElementById("result").innerHTML = `
-        ??? <b>Food:</b> ${foodChosen || "Kichu na ??"}<br><br>
-        ?? <b>Punishments:</b> ${punishments.join(", ") || "None ??"}<br><br>
-        ?? <b>Message:</b> ${msg || "No message ??"}
-    `;
+        document.getElementById("result").innerHTML = `
+            🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
+            😏 <b>Punishments:</b> ${punishments.join(", ") || "None 😇"}<br><br>
+            💌 <b>Message:</b> ${msg || "No message 😭"}
+        `;
 
-    // High-effort celebratory heart explosion effect!
-    let duration = 3 * 1000;
-    let end = Date.now() + duration;
+        // Celebratory heart explosion effect!
+        let duration = 2 * 1000;
+        let end = Date.now() + duration;
 
-    (function frame() {
-      confetti({
-        particleCount: 3,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
-      });
-      confetti({
-        particleCount: 3,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
-      });
+        (function frame() {
+          confetti({
+            particleCount: 3,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
+          });
+          confetti({
+            particleCount: 3,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
+          });
 
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    }());
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        }());
+    }, 3000);
+}
+
+// Generates and downloads the PNG directly onto mobile/desktop devices
+function downloadCard() {
+    const cardArea = document.getElementById('downloadable-card-area');
+    
+    html2canvas(cardArea, {
+        backgroundColor: '#ffffff',
+        scale: 2 // Increases quality for crisp rendering on phones
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'Labuu_Card.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
 }
 </script>
 
