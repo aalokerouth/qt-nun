@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Love Flow ❤️</title>
+<title>Amar sona puku ❤️</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -100,7 +100,7 @@ textarea {
     <h2>🥺 Rag kole achis?</h2>
 
     <div class="btn-container">
-        <button class="btn-yes" onclick="go2()">No 😇</button>
+        <button class="btn-yes" onclick="go2()">Ekdm Na😇</button>
 
         <button class="btn-no" id="yesBtn"
             ontouchstart="runAway(event)"
@@ -112,44 +112,45 @@ textarea {
 
 <!-- SCREEN 2 FOOD -->
 <div id="s2" class="card hidden">
-    <h2>🍽️ What to eat :)</h2>
+    <h2>🍽️Ki khaba Bachu</h2>
 
     <p id="reaction"></p>
 
     <div>
-        <button class="option-btn" onclick="food('🍕 Pizza','Cheesy heaven 🍕😍')">Pizza</button>
-        <button class="option-btn" onclick="food('🍜 Noodles','Yummy noodles 😋')">Noodles</button>
-        <button class="option-btn" onclick="food('🍔 Burger','Big bite energy 🍔🔥')">Burger</button>
-        <button class="option-btn" onclick="food('🍟 Fries','Crispy mood 😍')">Fries</button>
+        <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke')">Fish Fry Khabi? 🐟</button>
+        <button class="option-btn" onclick="food('🍜 Chow and Mau','Yummy noodles 😋')">Mix Schezwuan Chow 🍜</button>
+        <button class="option-btn" onclick="food('🍔 Burgir','Cholo kheye achi🍔🔥')">Burgir Khaba 🥹</button>
+        <button class="option-btn" onclick="food('🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')">Arun kakur Ice cream? 🍨</button>
+        <button class="option-btn" onclick="food('😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')">Sob 😡</button>
     </div>
 </div>
 
 <!-- SCREEN 3 PUNISHMENT -->
 <div id="s3" class="card hidden">
-    <h2>😏 Pick punishments (optional multi-select)</h2>
+    <h2>😏 Pick punishments (Ekta ba Duto ba Tinte)</h2>
 
-    <button class="option-btn" onclick="toggle(this,'Hug 💖')">Hug 💖</button>
-    <button class="option-btn" onclick="toggle(this,'Kiss 😘')">Kiss 😘</button>
-    <button class="option-btn" onclick="toggle(this,'Massage 💆')">Massage 💆</button>
-    <button class="option-btn" onclick="toggle(this,'Ice Cream 🍦')">Ice Cream 🍦</button>
-    <button class="option-btn" onclick="toggle(this,'Movie Date 🎬')">Movie Date 🎬</button>
-    <button class="option-btn" onclick="toggle(this,'Dinner Treat 🍽️')">Dinner Treat 🍽️</button>
+    <button class="option-btn" onclick="toggle(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
+    <button class="option-btn" onclick="toggle(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
+    <button class="option-btn" onclick="toggle(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
+    <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
+    <button class="option-btn" onclick="toggle(this,'Queen Treatment👑')">Rani Treatment👑</button>
+    <button class="option-btn" onclick="toggle(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
 
     <button class="next-btn" onclick="go4()">Next ➡️</button>
 </div>
 
 <!-- SCREEN 4 CUSTOM -->
 <div id="s4" class="card hidden">
-    <h2>💌 Anything else ma’am?</h2>
+    <h2>💌 Ar kichu bacha 🫠?</h2>
 
-    <textarea id="msg" placeholder="Type something special..."></textarea>
+    <textarea id="msg" placeholder="lekho ekhane...."></textarea>
 
-    <button class="next-btn" onclick="final()">Create Card 💖</button>
+    <button class="next-btn" onclick="final()">Magic Card 💖</button>
 </div>
 
 <!-- SCREEN 5 CARD -->
 <div id="s5" class="card hidden">
-    <h2>💖 Final Love Card</h2>
+    <h2>💖 Labuu Card</h2>
 
     <div id="result"></div>
 </div>
@@ -159,7 +160,7 @@ let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
 
-const yesTexts = ["No 😇","Really?","Try again 😜","Nope 😂","Catch me 😏"];
+const yesTexts = ["Yes😇","Chotti?","Pabbi na😜","Thakte pabbina😂","Dhole dekha😏"];
 
 function runAway(e){
     const btn = document.getElementById("yesBtn");
