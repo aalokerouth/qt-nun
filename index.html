@@ -162,6 +162,17 @@ textarea:focus { border-color: #ff4d6d; }
     color: #333;
 }
 
+.warning-msg {
+    color: #ff4d6d;
+    font-weight: bold;
+    text-align: center;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ffccd5;
+    margin-bottom: 15px;
+}
+
 .download-notice {
     margin-top: 15px;
     font-size: 13px;
@@ -372,6 +383,15 @@ function updateProgress(percent) {
 
 function go2(){
     playSound('transition');
+    
+    // Yahoo Confetti Blast effect triggers instantly on click
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff4d6d', '#ffb3c1', '#ffe5ec']
+    });
+
     setTimeout(() => {
         s1.classList.add("hidden");
         s2.classList.remove("hidden");
@@ -424,7 +444,7 @@ function final(){
         updateProgress(100);
 
         document.getElementById("result").innerHTML = `
-        <div class="warning-msg">😏 "Ebarer moto chere dilam, porer bar kore dekh"</div>
+        <div class="warning-msg">😏 Ebarer moto chere dilam, porer bar kore dekh</div>
             🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
             😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
             💌 <b>Message:</b> ${msg || "No message 😭"}
@@ -432,7 +452,7 @@ function final(){
 
         playSound('win');
 
-        // Celebratory heart explosion effect!
+        // Celebratory final card explosion effect!
         let duration = 2 * 1000;
         let end = Date.now() + duration;
 
