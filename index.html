@@ -12,146 +12,235 @@
 * { box-sizing: border-box; }
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#ffe5ec,#ffc2d1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
-    overflow:hidden;
-    position: relative;
-}
-
-/* Floating background elements */
-.heart-bg {
-    position: absolute;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.6;
-    bottom: -50px;
-    z-index: 0;
-    user-select: none;
-    pointer-events: none;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-}
-
-/* Progress Tracker Bar */
-.progress-container {
-    width: 100%;
-    background-color: #ffe5ec;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    height: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #efeae2; /* WhatsApp classic light background */
     display: flex;
-}
-.progress-bar {
-    width: 25%;
-    background: linear-gradient(90deg, #ffb3c1, #ff4d6d);
-    height: 100%;
-    transition: width 0.5s ease;
-}
-
-.card {
-    background:#fff;
-    padding:25px;
-    border-radius:18px;
-    width:90%;
-    max-width:450px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.12);
-    z-index: 10;
-    transition: all 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
     position: relative;
 }
 
-.hidden { display:none; }
+/* --- BOOTLOADER STYLING --- */
+#boot-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #000;
+    color: #00ff00;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+.boot-terminal {
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+.loading-track {
+    width: 100%;
+    height: 10px;
+    background: #222;
+    border-radius: 5px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+.loading-fill {
+    width: 0%;
+    height: 100%;
+    background: #00ff00;
+    transition: width 0.1s linear;
+}
 
-h2 { color:#ff4d6d; }
+/* --- LOGIN SCREEN --- */
+#login-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg,#ffe5ec,#ffc2d1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.login-box {
+    background: #fff;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+}
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ffb3c1;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+}
+.login-box button {
+    margin-top: 15px;
+    background: #ff4d6d;
+    color: white;
+    width: 100%;
+}
 
-.btn-container {
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    margin-top:20px;
-    position:relative;
-    min-height:90px;
+/* --- MAIN MOBILE/WHATSAPP FRAME --- */
+.phone-container {
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    background: #efeae2;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* WhatsApp Header */
+.wa-header {
+    background: #075e54;
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    z-index: 50;
+}
+.wa-avatar {
+    width: 40px;
+    height: 40px;
+    background: #fff0f3;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.wa-status {
+    font-size: 12px;
+    color: #dcf8c6;
+    font-weight: normal;
+}
+
+/* Chat Engine Window Area */
+.chat-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 100px;
+}
+
+/* Chat Bubble Mechanics */
+.bubble {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.4;
+    position: relative;
+    animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.bubble.incoming {
+    background: #fff;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+}
+.bubble.outgoing {
+    background: #dcf8c6;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+}
+@keyframes bubblePop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Target Graphic Assets Styling inside Window */
+.inline-food-img {
+    width: 100%;
+    max-height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+/* Bottom Actions Control Drawer */
+.action-drawer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #f0f0f0;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 50vh;
+    overflow-y: auto;
+    z-index: 100;
 }
 
 button {
-    padding:10px 18px;
-    border:none;
-    border-radius:20px;
-    cursor:pointer;
-    font-weight:bold;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
     transition: transform 0.1s ease;
 }
-
 button:active { transform: scale(0.95); }
 
-.btn-yes { background:#ff4d6d; color:#fff; }
-.btn-no { background:#6c757d; color:#fff; position:absolute; transition: left 0.15s ease, top 0.15s ease; }
-
-.option-btn {
-    background:#fff0f3;
-    border:2px solid #ffb3c1;
-    color:#ff4d6d;
-    padding:10px;
-    border-radius:12px;
-    margin:6px 0;
-    width:100%;
-    text-align: center;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.option-btn.active {
-    background:#ff4d6d;
-    color:#fff;
-    border-color: #ff4d6d;
-    transform: scale(1.02);
-}
-
-textarea {
-    width:100%;
-    height:80px;
-    border-radius:10px;
-    border:2px solid #ffb3c1;
-    padding:10px;
-    margin-top:10px;
-    resize:none;
-    outline: none;
-}
-textarea:focus { border-color: #ff4d6d; }
-
-#reaction {
-    height:20px;
-    font-weight:bold;
-    color:#ff4d6d;
-    margin-bottom: 15px;
-}
-
-.next-btn {
-    margin-top:15px;
-    background:#ff4d6d;
-    color:white;
+.reply-btn {
+    background: #fff;
+    border: 1px solid #b3cbd6;
+    color: #075e54;
+    text-align: left;
+    border-radius: 10px;
     width: 100%;
 }
+.reply-btn:hover {
+    background: #e1f3fb;
+}
+.reply-btn.active {
+    background: #075e54;
+    color: #fff;
+}
 
-/* Specific styling for the card area that will be converted to a PNG image */
+/* Runaway Target Setup */
+.runaway-wrap {
+    position: relative;
+    min-height: 50px;
+    width: 100%;
+}
+.btn-no-run {
+    background:#6c757d; 
+    color:#fff; 
+    position: absolute; 
+    transition: left 0.15s ease, top 0.15s ease;
+}
+
+/* Custom Output Highlight Structures */
 #downloadable-card-area {
     background: #ffffff;
     padding: 20px;
     border-radius: 14px;
     border: 2px dashed #ffb3c1;
-    margin-top: 15px;
 }
-
 #result {
     text-align: left;
     background: #fff0f3;
@@ -159,9 +248,7 @@ textarea:focus { border-color: #ff4d6d; }
     border-radius: 12px;
     line-height: 1.6;
     color: #333;
-    min-height: 120px;
 }
-
 .warning-msg {
     color: #ff4d6d;
     font-weight: bold;
@@ -173,127 +260,114 @@ textarea:focus { border-color: #ff4d6d; }
     margin-bottom: 15px;
 }
 
-.download-notice {
-    margin-top: 15px;
-    font-size: 13px;
-    color: #6c757d;
-    font-style: italic;
+/* --- SECRET LETTER OVERLAY --- */
+#secret-letter-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #1a0005, #4a0010);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
-
-.fallback-btn {
-    margin-top: 8px;
-    background: #28a745;
-    color: white;
+.envelope-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    padding: 30px;
     width: 100%;
-    font-size: 13px;
-    padding: 6px 12px;
+    max-width: 400px;
+    min-height: 350px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 3px solid #ff4d6d;
+    position: relative;
+}
+#letter-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #4a0010;
+    font-weight: bold;
+    text-align: left;
+    white-space: pre-line;
 }
 
-/* Particle effect style */
-.click-particle {
+/* Dynamic Ambient Floating Elements Background */
+.heart-bg {
     position: absolute;
-    pointer-events: none;
     font-size: 20px;
-    animation: particleExplode 0.6s ease-out forwards;
-}
-
-/* Yehh Text Explosion Style */
-.yehh-blast {
-    position: absolute;
-    color: #ff4d6d;
-    font-weight: 900;
-    font-size: 28px;
-    text-shadow: 2px 2px 0px #fff;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.6;
+    bottom: -50px;
+    z-index: 1;
+    user-select: none;
     pointer-events: none;
-    z-index: 100;
-    animation: yehhFlyUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
 }
 
-@keyframes yehhFlyUp {
-    0% { transform: translate(-50%, -50%) scale(0.3) rotate(-20deg); opacity: 0; }
-    30% { transform: translate(-50%, -100px) scale(1.3) rotate(10deg); opacity: 1; }
-    100% { transform: translate(-50%, -160px) scale(1) rotate(0deg); opacity: 0; }
+/* Bounce Micro-Interaction Physics */
+.bounce-target {
+    animation: bounceSelect 0.4s ease;
+}
+@keyframes bounceSelect {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
 }
 
-@keyframes particleExplode {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    100% { transform: translate(var(--twx), var(--twy)) scale(1.4); opacity: 0; }
-}
+.hidden { display: none !important; }
 
 </style>
 </head>
-
 <body>
 
-<div class="card">
-    <!-- Progress Indicator Bar -->
-    <div class="progress-container">
-        <div id="pBar" class="progress-bar"></div>
+<!-- SCREEN: TERMINAL INTERACTIVE BOOTLOADER -->
+<div id="boot-screen">
+    <div class="boot-terminal">
+        <div>> initializing pukuOS v4.0.26...</div>
+        <div id="boot-status" style="margin-top:5px;">> loading modules...</div>
+        <div class="loading-track"><div id="boot-fill" class="loading-fill"></div></div>
     </div>
+</div>
 
-    <!-- SCREEN 1 -->
-    <div id="s1">
-        <h2>🥺 Rag kole achis?</h2>
-
-        <div class="btn-container">
-            <button class="btn-yes" onclick="go2(event)">Ekdm Na😇</button>
-
-            <button class="btn-no" id="yesBtn"
-                style="left: 160px; top: 0px;"
-                ontouchstart="runAway(event)"
-                onmouseover="runAway(event)">
-                Yes 😈
-            </button>
-        </div>
+<!-- SCREEN: AUTH REGISTRATION ACCESS LAYER -->
+<div id="login-screen" class="hidden">
+    <div class="login-box">
+        <h2>🔒 pukuOS Secure Login</h2>
+        <p style="color:#666; font-size:14px;">Enter password to unlock conversation</p>
+        <input type="password" id="passInput" placeholder="Password dekho..." />
+        <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="verifyPassword()">Unlock 🔓</button>
     </div>
+</div>
 
-    <!-- SCREEN 2 FOOD -->
-    <div id="s2" class="hidden">
-        <h2>🍽️Ki khaba Bachu</h2>
-
-        <p id="reaction"></p>
-
+<!-- CONTAINER: APPLICATION CHAT CONVERSATION FRAME -->
+<div class="phone-container">
+    <div class="wa-header">
+        <div class="wa-avatar">❤️</div>
         <div>
-            <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke', event)">Fish Fry Khabi? 🐟</button>
-            <button class="option-btn" onclick="food('🍜 Chow and Mau','Yummy noodles 😋', event)">Mix Schezwuan Chow 🍜</button>
-            <button class="option-btn" onclick="food('🍔 Burgir','Cholo kheye achi🍔🔥', event)">Burgir Khaba 🥹</button>
-            <button class="option-btn" onclick="food('🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹', event)">Arun kakur Ice cream? 🍨</button>
-            <button class="option-btn" onclick="food('😍 Paisar ovab😭','Tomar jonno sob kichu bachhu', event)">Sob 😡</button>
+            <div>Amar Sona Puku</div>
+            <div id="status-indicator" class="wa-status">online</div>
         </div>
     </div>
 
-    <!-- SCREEN 3 PUNISHMENT -->
-    <div id="s3" class="hidden">
-        <h2>😏 Pick punishments (Ekta ba Duto ba Tinte)</h2>
-
-        <button class="option-btn" onclick="toggle(this,'Puku 💆🏻‍♀️', event)">Puku massage 💆🏻‍♀️💖</button>
-        <button class="option-btn" onclick="toggle(this,'Full body Kissu 😘', event)">Full body Kiss 😘</button>
-        <button class="option-btn" onclick="toggle(this,'Back Massage 15 min💆', event)">Back Massage 💆15 min</button>
-        <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa', event)">Continuous Ice Cream 🍦</button>
-        <button class="option-btn" onclick="toggle(this,'Queen Treatment👑', event)">Rani Treatment👑</button>
-        <button class="option-btn" onclick="toggle(this,'Bike chalano sekha🏍️', event)">Bike chalano sekha🏍️</button>
-
-        <button class="next-btn" onclick="go4()">Next ➡️</button>
+    <!-- Active Message Window Stream -->
+    <div class="chat-window" id="chatWindow">
+        <!-- Injected asynchronously via engine -->
     </div>
 
-    <!-- SCREEN 4 CUSTOM -->
-    <div id="s4" class="hidden">
-        <h2>💌 Ar kichu bacha 🫠?</h2>
-
-        <textarea id="msg" placeholder="lekho ekhane...."></textarea>
-
-        <button class="next-btn" onclick="final()">Magic Card 💖</button>
+    <!-- Control Input Panel -->
+    <div class="action-drawer" id="actionDrawer">
+        <!-- Contextual control items populated via engine states -->
     </div>
+</div>
 
-    <!-- SCREEN 5 CARD -->
-    <div id="s5" class="hidden">
-        <div id="downloadable-card-area">
-            <h2 style="margin-top:0;">💖 Labuu Card</h2>
-            <div id="result"></div>
-        </div>
-        
-        <p class="download-notice">✨ Jeta download hche pathao amay noile kaj hobeni😝</p>
-        <button class="fallback-btn" onclick="downloadCard()">Eta patha whachapp ee📱</button>
+<!-- SCREEN: SECRET LAYER COMPONENT -->
+<div id="secret-letter-overlay" class="hidden">
+    <div class="envelope-card">
+        <h2 style="color:#ff4d6d; margin-top:0;">💌 Pure Love Note</h2>
+        <div id="letter-text"></div>
     </div>
 </div>
 
@@ -301,255 +375,339 @@ textarea:focus { border-color: #ff4d6d; }
 let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
-
 const yesTexts = ["Yes😠","Chotti?","Pabbi na dhotte😜","Thakte pabbina😂","Dhole dekha😏"];
 
-// Built-in Synth Sound Effects Generator
+// High fidelity Audio Synth Sound Engine Layer
 let audioCtx = null;
 function playSound(type) {
     try {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let osc = audioCtx.createOscillator();
         let gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        osc.connect(gain); gain.connect(audioCtx.destination);
 
         if (type === 'click') {
-            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
-        } else if (type === 'transition') {
+            osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.05);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.05);
+        } else if (type === 'yum') {
             osc.type = 'triangle';
-            osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.2);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
-            osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-        } else if (type === 'win') {
-            [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.25);
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.25);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+        } else if (type === 'pop') {
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.08);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.08);
+        } else if (type === 'letter') {
+            // Arpeggio background note loops for romantic atmosphere simulation
+            let notes = [261.63, 329.63, 392.00, 523.25];
+            notes.forEach((f, i) => {
                 let o = audioCtx.createOscillator();
                 let g = audioCtx.createGain();
-                o.connect(g); g.connect(audioCtx.destination);
-                o.frequency.setValueAtTime(f, audioCtx.currentTime + (idx * 0.1));
-                g.gain.setValueAtTime(0.1, audioCtx.currentTime + (idx * 0.1));
-                g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + (idx * 0.1) + 0.3);
-                o.start(o.currentTime); o.stop(audioCtx.currentTime + (idx * 0.1) + 0.3);
+                o.type = 'sine'; o.connect(g); g.connect(audioCtx.destination);
+                o.frequency.setValueAtTime(f, audioCtx.currentTime + (i * 0.15));
+                g.gain.setValueAtTime(0.04, audioCtx.currentTime + (i * 0.15));
+                g.gain.linearRampToValueAtTime(0, audioCtx.currentTime + (i * 0.15) + 0.4);
+                o.start(audioCtx.currentTime + (i * 0.15)); o.stop(audioCtx.currentTime + (i * 0.15) + 0.4);
             });
         }
     } catch(e) {}
 }
 
-function spawnParticles(e, emoji) {
-    const targetEmoji = emoji || '❤️';
-    for(let i=0; i<6; i++) {
-        let p = document.createElement('div');
-        p.classList.add('click-particle');
-        p.innerText = targetEmoji;
-        p.style.left = (e.clientX || e.touches?.[0]?.clientX || window.innerWidth/2) + 'px';
-        p.style.top = (e.clientY || e.touches?.[0]?.clientY || window.innerHeight/2) + 'px';
-        
-        let twX = (Math.random() - 0.5) * 160 + 'px';
-        let twY = (Math.random() - 0.5) * 160 + 'px';
-        p.style.setProperty('--twx', twX);
-        p.style.setProperty('--twy', twY);
-        
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 600);
+// Native Speech Synthesis Pipeline Execution
+function speakSentence(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        let msg = new SpeechSynthesisUtterance(text);
+        msg.rate = 0.9;
+        msg.pitch = 1.1;
+        window.speechSynthesis.speak(msg);
     }
 }
 
-// Ambient Floating Background System
-const expressions = ['❤️', '💖', '✨', '🌸', '🍕', '🍦'];
-setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('heart-bg');
-    heart.innerText = expressions[Math.floor(Math.random() * expressions.length)];
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 7000);
-}, 600);
+// Startup Sequencer Simulation loop
+window.addEventListener('DOMContentLoaded', () => {
+    let fill = document.getElementById('boot-fill');
+    let status = document.getElementById('boot-status');
+    let width = 0;
+    
+    let interval = setInterval(() => {
+        width += Math.floor(Math.random() * 12) + 4;
+        if (width >= 100) {
+            width = 100;
+            clearInterval(interval);
+            status.innerText = "> starting pukuOS loaded successfully!";
+            setTimeout(() => {
+                document.getElementById('boot-screen').classList.add('hidden');
+                document.getElementById('login-screen').classList.remove('hidden');
+            }, 600);
+        }
+        fill.style.width = width + '%';
+        if(width > 40 && width < 75) status.innerText = "> mounting local configurations...";
+        if(width >= 75) status.innerText = "> boot sequence finishing...";
+    }, 100);
+});
+
+function verifyPassword() {
+    let input = document.getElementById('passInput').value;
+    if (input.toLowerCase() === 'labu') {
+        playSound('pop');
+        document.getElementById('login-screen').classList.add('hidden');
+        startChatSession();
+    } else {
+        alert("Vul password! Hint: labu");
+    }
+}
+
+// Background Floating System Configurator
+function triggerFloatingHearts() {
+    const symbols = ['❤️', '💖', '✨', '🌸', '💕'];
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-bg');
+        heart.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        heart.style.fontSize = (Math.random() * 15 + 20) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 450);
+}
+
+// Conversation Simulation Framework Engines
+const win = document.getElementById('chatWindow');
+const drawer = document.getElementById('actionDrawer');
+const indicator = document.getElementById('status-indicator');
+
+function updateStatus(isTyping) {
+    indicator.innerText = isTyping ? "typing..." : "online";
+    indicator.style.color = isTyping ? "#ffb3c1" : "#dcf8c6";
+}
+
+function renderIncomingBubble(text, htmlContent = "") {
+    playSound('pop');
+    let b = document.createElement('div');
+    b.classList.add('bubble', 'incoming');
+    b.innerHTML = htmlContent ? htmlContent : text;
+    win.appendChild(b);
+    win.scrollTop = win.scrollHeight;
+}
+
+function renderOutgoingBubble(text) {
+    playSound('click');
+    let b = document.createElement('div');
+    b.classList.add('bubble', 'outgoing');
+    b.innerText = text;
+    win.appendChild(b);
+    win.scrollTop = win.scrollHeight;
+}
+
+function startChatSession() {
+    updateStatus(true);
+    setTimeout(() => {
+        updateStatus(false);
+        renderIncomingBubble("🥺 Rag kole achis?");
+        
+        drawer.innerHTML = `
+            <div class="runaway-wrap" id="s1-btns">
+                <button class="reply-btn" style="width:auto; display:inline-block;" onclick="selectRagNo(this)">Ekdm Na😇</button>
+                <button class="btn-no-run" id="yesBtn" style="left:160px; top:0px;" ontouchstart="runAway(event)" onmouseover="runAway(event)">Yes 😈</button>
+            </div>
+        `;
+    }, 1500);
+}
 
 function runAway(e){
     e.preventDefault();
     const btn = document.getElementById("yesBtn");
-    
-    let randomX = Math.floor(Math.random() * 240);
-    let randomY = Math.floor(Math.random() * 60);
-
+    let randomX = Math.floor(Math.random() * 180);
+    let randomY = Math.floor(Math.random() * 20);
     btn.style.left = randomX + "px";
     btn.style.top = randomY + "px";
-
     btn.innerText = yesTexts[textIndex++ % yesTexts.length];
     playSound('click');
 }
 
-function updateProgress(percent) {
-    document.getElementById("pBar").style.width = percent + "%";
-}
-
-function go2(e){
-    playSound('transition');
+function selectRagNo(btn) {
+    btn.classList.add('bounce-target');
+    drawer.innerHTML = "";
+    renderOutgoingBubble("Ekdm Na😇");
     
-    // Yehh !! text pop-up creation
-    let el = document.createElement('div');
-    el.classList.add('yehh-blast');
-    el.innerText = "Yehh !! 🎉";
-    el.style.left = (e.clientX || window.innerWidth / 2) + 'px';
-    el.style.top = (e.clientY || window.innerHeight / 2) + 'px';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1200);
+    confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
 
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#ff4d6d', '#ffb3c1', '#ffe5ec']
-    });
-
+    // 3 Second Tab Transition Delay
     setTimeout(() => {
-        s1.classList.add("hidden");
-        s2.classList.remove("hidden");
-        updateProgress(50);
-    }, 2000);
-}
-
-function food(f,t, e){
-    foodChosen = f;
-    document.getElementById("reaction").innerText = t;
-    playSound('click');
-    spawnParticles(e, '✨');
-
-    setTimeout(()=>{
-        playSound('transition');
-        s2.classList.add("hidden");
-        s3.classList.remove("hidden");
-        updateProgress(75);
+        updateStatus(true);
+        setTimeout(() => {
+            updateStatus(false);
+            speakSentence("Ki khaba bacha?");
+            renderIncomingBubble("🍽️ Ki khaba Bachu");
+            
+            // Render Option reply structures with embedded media graphic assets
+            drawer.innerHTML = `
+                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? 🐟</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍜 Chow and Mau','Yummy noodles 😋')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow 🍜</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍔 Burgir','Cholo kheye achi🍔🔥')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba 🥹</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? 🍨</button>
+                <button class="reply-btn" onclick="selectFood(this, '😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&auto=format&fit=crop&q=60">Sob 😡</button>
+            `;
+        }, 1500);
     }, 3000);
 }
 
-function toggle(el,val, e){
-    el.classList.toggle("active");
+function selectFood(btn, f, t) {
+    playSound('yum');
+    btn.classList.add('bounce-target');
+    foodChosen = f;
+    drawer.innerHTML = "";
+    renderOutgoingBubble(btn.innerText);
+
+    setTimeout(() => {
+        renderIncomingBubble(t);
+        
+        // 3 Second Tab Transition Delay
+        setTimeout(() => {
+            updateStatus(true);
+            setTimeout(() => {
+                updateStatus(false);
+                renderIncomingBubble("😏 Pick punishments (Ekta ba Duto ba Tinte)");
+                
+                drawer.innerHTML = `
+                    <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+                        <button class="reply-btn" onclick="togglePunishment(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
+                        <button class="reply-btn" onclick="toggleGram(this,'Queen Treatment👑')">Rani Treatment👑</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
+                        <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px;" onclick="submitPunishments()">Next ➡️</button>
+                    </div>
+                `;
+            }, 1500);
+        }, 3000);
+    }, 1000);
+}
+
+function togglePunishment(btn, val) {
     playSound('click');
-    spawnParticles(e, '💖');
+    btn.classList.toggle('active');
+    btn.classList.add('bounce-target');
+    setTimeout(() => btn.classList.remove('bounce-target'), 400);
 
     if(punishments.includes(val)){
-        punishments = punishments.filter(x=>x!==val);
+        punishments = punishments.filter(x => x !== val);
     } else {
         punishments.push(val);
     }
 }
 
-function go4(){
-    playSound('transition');
+function submitPunishments() {
+    drawer.innerHTML = "";
+    renderOutgoingBubble("Selected punishments: " + (punishments.join(", ") || "None"));
+
+    // 3 Second Tab Transition Delay
     setTimeout(() => {
-        s3.classList.add("hidden");
-        s4.classList.remove("hidden");
-        updateProgress(90);
-    }, 2000);
+        updateStatus(true);
+        setTimeout(() => {
+            updateStatus(false);
+            renderIncomingBubble("💌 Ar kichu bacha 🫠?");
+            
+            drawer.innerHTML = `
+                <textarea id="msgInput" placeholder="lekho ekhane...." style="width:100%; height:60px; border-radius:10px; border:2px solid #ffb3c1; padding:8px; resize:none; outline:none;"></textarea>
+                <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="submitCustomMessage()">Magic Card 💖</button>
+            `;
+        }, 1500);
+    }, 3000);
 }
 
-// Typing engine configuration to process elements character by character smoothly
-function typeHTML(element, htmlText, delay, callback) {
-    let currentText = "";
-    let i = 0;
-    let inTag = false;
+function submitCustomMessage() {
+    let textVal = document.getElementById('msgInput').value;
+    drawer.innerHTML = "";
+    renderOutgoingBubble(textVal || "No custom text added");
 
-    function step() {
-        if (i >= htmlText.length) {
-            if(callback) callback();
-            return;
-        }
-        
-        let char = htmlText[i];
-        if (char === '<') inTag = true;
-        
-        currentText += char;
-        
-        if (char === '>') inTag = false;
-        
-        element.innerHTML = currentText;
-        i++;
-        
-        if (inTag) {
-            step(); 
-        } else {
-            setTimeout(step, delay);
-        }
-    }
-    step();
-}
-
-function final(){
-    let msg = document.getElementById("msg").value;
-    playSound('transition');
-
+    // 3 Second Tab Transition Delay
     setTimeout(() => {
-        s4.classList.add("hidden");
-        s5.classList.remove("hidden");
-        updateProgress(100);
+        updateStatus(true);
+        setTimeout(() => {
+            updateStatus(false);
+            speakSentence("Labuu card is ready...");
+            
+            // Output standalone container generation directly appended seamlessly into flow
+            const finalCardHTML = `
+                <div id="downloadable-card-area">
+                    <h2 style="margin-top:0; color:#ff4d6d; text-align:center;">💖 Labuu Card</h2>
+                    <div id="result">
+                        <div class="warning-msg">😏 "Ebarer moto chere dilam, porer bar kore dekh"</div>
+                        🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
+                        😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
+                        💌 <b>Message:</b> ${textVal || "No message 😭"}
+                    </div>
+                </div>
+            `;
+            renderIncomingBubble("", finalCardHTML);
 
-        // Raw HTML blueprint target formatted specifically for the typewriter loop
-        const finalHTML = `
-            <div class="warning-msg">😏 Ebarer moto chere dilam, porer bar kore dekh</div>
-            🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
-            😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
-            💌 <b>Message:</b> ${msg || "No message 😭"}
-        `;
+            // Explosive generation burst pattern initialization
+            let end = Date.now() + (2 * 1000);
+            (function frame() {
+              confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffb3c1'] });
+              confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffb3c1'] });
+              if (Date.now() < end) requestAnimationFrame(frame);
+            }());
 
-        const resultContainer = document.getElementById("result");
-        resultContainer.innerHTML = ""; 
+            setTimeout(() => { downloadCard(); }, 600);
 
-        // Typewriter runs smoothly, triggering high-fidelity download generation once complete
-        typeHTML(resultContainer, finalHTML, 15, () => {
-            setTimeout(() => {
-                downloadCard();
-            }, 500);
-        });
-
-        playSound('win');
-
-        let duration = 2 * 1000;
-        let end = Date.now() + duration;
-
-        (function frame() {
-          confetti({
-            particleCount: 3,
-            angle: 60,
-            spread: 55,
-            origin: { x: 0 },
-            colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
-          });
-          confetti({
-            particleCount: 3,
-            angle: 120,
-            spread: 55,
-            origin: { x: 1 },
-            colors: ['#ff4d6d', '#ffb3c1', '#ffccd5']
-          });
-
-          if (Date.now() < end) {
-            requestAnimationFrame(frame);
-          }
-        }());
+            // Append final conditional workflow unlock pathways
+            drawer.innerHTML = `
+                <button class="fallback-btn" style="background:#28a745; color:white; margin-bottom:5px;" onclick="downloadCard()">Eta patha whatsapp ee 📱</button>
+                <button style="background:#9c27b0; color:white; animation: pulse 1.5s infinite;" onclick="openSecretLetter()">🎁 Open Secret Letter</button>
+            `;
+        }, 1500);
     }, 3000);
 }
 
 function downloadCard() {
     const cardArea = document.getElementById('downloadable-card-area');
-    
-    html2canvas(cardArea, {
-        backgroundColor: '#ffffff',
-        scale: 2
-    }).then(canvas => {
+    if(!cardArea) return;
+    html2canvas(cardArea, { backgroundColor: '#ffffff', scale: 2 }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'Labuu_Card.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     });
+}
+
+function openSecretLetter() {
+    document.getElementById('secret-letter-overlay').classList.remove('hidden');
+    triggerFloatingHearts();
+    
+    // Continuous synth arpeggio simulation loops safely on tick update window frames
+    let bgMusicInterval = setInterval(() => {
+        playSound('letter');
+    }, 800);
+
+    const letterContent = `Dear Puku,
+
+    You are the absolute best thing that ever happened to me. Thank you for always being my cute little bachha, my partner in crime, and my favorite person to tease. 
+
+    Ebarer moto chere dilam, porer bar chotti dhorbo! I love you infinitely! ❤️`;
+
+    let txtContainer = document.getElementById('letter-text');
+    let idx = 0;
+    
+    function typeLetter() {
+        if (idx < letterContent.length) {
+            txtContainer.innerHTML += letterContent[idx];
+            idx++;
+            setTimeout(typeLetter, 45);
+        }
+    }
+    typeLetter();
 }
 </script>
 
