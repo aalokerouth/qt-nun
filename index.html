@@ -269,7 +269,7 @@ textarea:focus { border-color: #ff4d6d; }
         </div>
         
         <p class="download-notice">✨ Card downloaded automatically to your device!</p>
-        <button class="fallback-btn" onclick="downloadCard()">Click here if it didn't download 📸</button>
+        <button class="fallback-btn" onclick="downloadCard()">Eta patha whachapp ee📱</button>
     </div>
 </div>
 
@@ -376,7 +376,7 @@ function go2(){
         s1.classList.add("hidden");
         s2.classList.remove("hidden");
         updateProgress(50);
-    }, 3000);
+    }, 2000);
 }
 
 function food(f,t, e){
@@ -411,7 +411,7 @@ function go4(){
         s3.classList.add("hidden");
         s4.classList.remove("hidden");
         updateProgress(90);
-    }, 3000);
+    }, 2000);
 }
 
 function final(){
@@ -424,8 +424,9 @@ function final(){
         updateProgress(100);
 
         document.getElementById("result").innerHTML = `
+        <div class="warning-msg">😏 "Ebarer moto chere dilam, porer bar kore dekh"</div>
             🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
-            😏 <b>Punishments:</b> ${punishments.join(", ") || "None 😇"}<br><br>
+            😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
             💌 <b>Message:</b> ${msg || "No message 😭"}
         `;
 
