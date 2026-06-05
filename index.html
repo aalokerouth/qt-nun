@@ -19,7 +19,6 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
-    position: relative;
 }
 
 .card {
@@ -31,12 +30,11 @@ body {
     max-width: 450px;
     width: 90%;
     position: relative;
-    z-index: 2;
 }
 
-h2 { color: #ff4d6d; margin-bottom: 15px; }
+h2 { color: #ff4d6d; }
 
-p { color: #555; line-height: 1.6; }
+p { color: #555; }
 
 .btn-container {
     display: flex;
@@ -56,10 +54,7 @@ button {
     font-weight: bold;
 }
 
-.btn-yes {
-    background: #ff4d6d;
-    color: white;
-}
+.btn-yes { background: #ff4d6d; color: white; }
 
 .btn-no {
     background: #6c757d;
@@ -71,7 +66,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .option-btn {
@@ -80,7 +75,6 @@ button {
     border: 2px solid #ffb3c1;
     border-radius: 15px;
     padding: 12px;
-    text-align: left;
 }
 
 .option-btn:hover {
@@ -90,23 +84,37 @@ button {
 
 .hidden { display: none; }
 
-.emoji-header { font-size: 55px; margin-bottom: 10px; }
+.emoji-header { font-size: 55px; }
 
 .certificate {
-    background: linear-gradient(135deg, #fff0f3, #ffffff);
+    background: linear-gradient(135deg,#fff0f3,#fff);
     border: 3px dashed #ff7b93;
     padding: 15px;
     border-radius: 15px;
-    margin-top: 15px;
+}
+
+#reactionText {
+    height: 25px;
+    font-weight: bold;
+    color: #ff4d6d;
+}
+
+/* input */
+textarea {
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+    border: 2px solid #ffb3c1;
+    padding: 10px;
+    resize: none;
+    margin-top: 10px;
 }
 
 .heart {
     position: fixed;
     color: #ff4d6d;
-    font-size: 24px;
     animation: floatUp linear infinite;
     opacity: 0.6;
-    z-index: 1;
 }
 
 @keyframes floatUp {
@@ -118,10 +126,10 @@ button {
 
 <body>
 
+<!-- SCREEN 1 -->
 <div id="screen1" class="card">
     <div class="emoji-header">🥺</div>
     <h2>Rag kole achis?</h2>
-    <p>I know you're mad, but please be honest...</p>
 
     <div class="btn-container">
         <button class="btn-yes" onclick="goToScreen2()">No 😇</button>
@@ -129,41 +137,47 @@ button {
         <button class="btn-no"
             id="yesBtn"
             ontouchstart="moveYesButton(event)"
-            onmouseover="moveYesButton(event)"
-            onclick="moveYesButton(event)">
+            onmouseover="moveYesButton(event)">
             Yes 😈
         </button>
     </div>
 </div>
 
+<!-- SCREEN 2 -->
 <div id="screen2" class="card hidden">
     <div class="emoji-header">🥰</div>
     <h2>Choo Sweet!</h2>
-    <p>Now tell me what you want to eat ❤️</p>
+    <p>What do you want to eat? ❤️</p>
+
+    <p id="reactionText"></p>
 
     <div class="options-list">
-        <button class="option-btn" onclick="goToScreen3('🍜 Mix Noodles')">🍜 Mix Noodles</button>
-        <button class="option-btn" onclick="goToScreen3('🐟 Crispy Fish Fries')">🐟 Crispy Fish Fries</button>
+        <button class="option-btn" onclick="goToScreen3('🍜 Noodles')">🍜 Noodles</button>
         <button class="option-btn" onclick="goToScreen3('🍕 Pizza')">🍕 Pizza</button>
-        <button class="option-btn" onclick="goToScreen3('🍔 Burger & Fries')">🍔 Burger</button>
+        <button class="option-btn" onclick="goToScreen3('🍔 Burger')">🍔 Burger</button>
         <button class="option-btn" onclick="goToScreen3('🍨 Ice Cream')">🍨 Ice Cream</button>
     </div>
 </div>
 
+<!-- SCREEN 3 -->
 <div id="screen3" class="card hidden">
     <div class="emoji-header">👑</div>
-    <h2>Food Locked In!</h2>
+    <h2>Almost Done!</h2>
 
-    <p>Pick my punishment 😅</p>
+    <p>Write something special 💌</p>
+
+    <textarea id="customMsg" placeholder="Type your message here..."></textarea>
+
+    <p>Now pick punishment 😏</p>
 
     <div class="options-list">
-        <button class="option-btn" onclick="goToFinalScreen('💖 Khub Ador')">💖 Khub Ador</button>
-        <button class="option-btn" onclick="goToFinalScreen('💆‍♂️ Massage')">💆‍♂️ Massage</button>
-        <button class="option-btn" onclick="goToFinalScreen('🤫 Listen to everything')">🤫 Listen to me</button>
-        <button class="option-btn" onclick="goToFinalScreen('🍦 Ice Cream Treat')">🍦 Ice Cream</button>
+        <button class="option-btn" onclick="goToFinalScreen('💖 Hug')">💖 Hug</button>
+        <button class="option-btn" onclick="goToFinalScreen('💆 Massage')">💆 Massage</button>
+        <button class="option-btn" onclick="goToFinalScreen('🍦 Ice Cream')">🍦 Ice Cream</button>
     </div>
 </div>
 
+<!-- SCREEN 4 -->
 <div id="screen4" class="card hidden">
     <div class="emoji-header">💖</div>
     <h2>Mission Accomplished!</h2>
@@ -172,25 +186,22 @@ button {
         <h3 style="color:#ff4d6d;">Love Certificate ❤️</h3>
         <p id="summaryText"></p>
 
-        <p><strong>Your puku is officially on pamper duty 🥰</strong></p>
+        <p id="customTextShow"></p>
 
-        <div style="font-size:40px;">❤️ 🌹 ❤️</div>
+        <div>❤️ 🌹 ❤️</div>
     </div>
 </div>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
 <script>
 let chosenFood = "";
+let customMessage = "";
 let textIndex = 0;
 
 const funnyTexts = [
-    "Really?",
-    "Sure?",
-    "Think Again",
-    "Nope",
-    "Catch Me",
-    "Not Happening"
+    "Nope 😆",
+    "Try again 😏",
+    "Catch me 😜",
+    "Not possible 😂"
 ];
 
 function moveYesButton(event) {
@@ -199,106 +210,85 @@ function moveYesButton(event) {
 
     const rect = container.getBoundingClientRect();
 
-    let x, y;
+    let x = event.touches?.[0]?.clientX || event.clientX || rect.left;
+    let y = event.touches?.[0]?.clientY || event.clientY || rect.top;
 
-    if (event.touches && event.touches.length > 0) {
-        x = event.touches[0].clientX;
-        y = event.touches[0].clientY;
-    } else if (event.clientX && event.clientY) {
-        x = event.clientX;
-        y = event.clientY;
-    } else {
-        x = rect.left + rect.width / 2;
-        y = rect.top + rect.height / 2;
-    }
+    let dx = (btn.offsetLeft - x);
+    let dy = (btn.offsetTop - y);
 
-    const btnRect = btn.getBoundingClientRect();
+    const dist = Math.sqrt(dx*dx + dy*dy) || 1;
 
-    let dx = (btnRect.left + btnRect.width / 2) - x;
-    let dy = (btnRect.top + btnRect.height / 2) - y;
+    dx /= dist;
+    dy /= dist;
 
-    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-    dx /= distance;
-    dy /= distance;
+    let newX = btn.offsetLeft + dx * 120;
+    let newY = btn.offsetTop + dy * 120;
 
-    const moveDistance = 140;
-
-    let newX = btn.offsetLeft + dx * moveDistance;
-    let newY = btn.offsetTop + dy * moveDistance;
-
-    const maxX = container.clientWidth - btn.offsetWidth;
-    const maxY = container.clientHeight - btn.offsetHeight;
-
-    newX = Math.max(0, Math.min(maxX, newX));
-    newY = Math.max(0, Math.min(maxY, newY));
+    newX = Math.max(0, Math.min(container.clientWidth - 100, newX));
+    newY = Math.max(0, Math.min(80, newY));
 
     btn.style.position = "absolute";
     btn.style.left = newX + "px";
     btn.style.top = newY + "px";
 
-    btn.innerText = funnyTexts[textIndex % funnyTexts.length] + " 😈";
-    textIndex++;
+    btn.innerText = funnyTexts[textIndex++ % funnyTexts.length];
 }
 
 function goToScreen2() {
-    document.getElementById('screen1').classList.add('hidden');
-    document.getElementById('screen2').classList.remove('hidden');
+    document.getElementById("screen1").classList.add("hidden");
+    document.getElementById("screen2").classList.remove("hidden");
 }
 
 function goToScreen3(food) {
     chosenFood = food;
-    document.getElementById('screen2').classList.add('hidden');
-    document.getElementById('screen3').classList.remove('hidden');
+
+    const reactions = {
+        "🍜 Noodles": "Yummy noodles 😋",
+        "🍕 Pizza": "Cheesy heaven 🍕😍",
+        "🍔 Burger": "Big bite energy 🍔🔥",
+        "🍨 Ice Cream": "Sweet treat 🍦🥺"
+    };
+
+    document.getElementById("reactionText").innerText =
+        reactions[food] || "Yummy choice 😍";
+
+    setTimeout(() => {
+        document.getElementById("screen2").classList.add("hidden");
+        document.getElementById("screen3").classList.remove("hidden");
+    }, 900);
 }
 
 function goToFinalScreen(punishment) {
-    document.getElementById('screen3').classList.add('hidden');
-    document.getElementById('screen4').classList.remove('hidden');
+    customMessage = document.getElementById("customMsg").value;
 
-    document.getElementById('summaryText').innerHTML = `
-        🍽️ <strong>Food:</strong> ${chosenFood}<br><br>
-        🎁 <strong>Punishment:</strong> ${punishment}<br><br>
-        📅 <strong>Date:</strong> ${new Date().toLocaleDateString()}
+    document.getElementById("screen3").classList.add("hidden");
+    document.getElementById("screen4").classList.remove("hidden");
+
+    document.getElementById("summaryText").innerHTML = `
+        🍽️ <b>Food:</b> ${chosenFood}<br>
+        🎁 <b>Punishment:</b> ${punishment}<br>
+        📅 <b>Date:</b> ${new Date().toLocaleDateString()}
     `;
 
-    setTimeout(downloadFinalCard, 1000);
+    document.getElementById("customTextShow").innerHTML =
+        customMessage ? `💌 <i>${customMessage}</i>` : "";
+
+    setTimeout(downloadCard, 1000);
 }
 
-async function downloadFinalCard() {
-    const card = document.getElementById('screen4');
+function downloadCard() {
+    const card = document.getElementById("screen4");
 
-    const canvas = await html2canvas(card, {
-        scale: 3,
-        backgroundColor: "#ffffff"
+    html2canvas(card).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "love-card.png";
+        link.href = canvas.toDataURL();
+        link.click();
     });
-
-    const image = canvas.toDataURL("image/png");
-
-    const link = document.createElement('a');
-    link.href = image;
-    link.download = "Love-Certificate.png";
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
 }
-
-function createHearts() {
-    for (let i = 0; i < 20; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (4 + Math.random() * 5) + "s";
-        heart.style.animationDelay = Math.random() * 5 + "s";
-
-        document.body.appendChild(heart);
-    }
-}
-
-createHearts();
 </script>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 </body>
 </html>
