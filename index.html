@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amar sona puku ❤️</title>
+<title>Amar sona puku ??</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -51,7 +52,7 @@ button {
 }
 
 .btn-yes { background:#ff4d6d; color:#fff; }
-.btn-no { background:#6c757d; color:#fff; position:relative; }
+.btn-no { background:#6c757d; color:#fff; position:absolute; }
 
 .option-btn {
     background:#fff0f3;
@@ -90,67 +91,73 @@ textarea {
     color:white;
 }
 
+#result {
+    text-align: left;
+    background: #fff0f3;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px dashed #ffb3c1;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
 <div id="s1" class="card">
-    <h2>🥺 Rag kole achis?</h2>
+    <h2>?? Rag kole achis?</h2>
 
     <div class="btn-container">
-        <button class="btn-yes" onclick="go2()">Ekdm Na😇</button>
+        <button class="btn-yes" onclick="go2()">Ekdm Na??</button>
 
         <button class="btn-no" id="yesBtn"
+            style="left: 160px; top: 0px;"
             ontouchstart="runAway(event)"
             onmouseover="runAway(event)">
-            Yes 😈
+            Yes ??
         </button>
     </div>
 </div>
 
-<!-- SCREEN 2 FOOD -->
 <div id="s2" class="card hidden">
-    <h2>🍽️Ki khaba Bachu</h2>
+    <h2>???Ki khaba Bachu</h2>
 
     <p id="reaction"></p>
 
     <div>
-        <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke')">Fish Fry Khabi? 🐟</button>
-        <button class="option-btn" onclick="food('🍜 Chow and Mau','Yummy noodles 😋')">Mix Schezwuan Chow 🍜</button>
-        <button class="option-btn" onclick="food('🍔 Burgir','Cholo kheye achi🍔🔥')">Burgir Khaba 🥹</button>
-        <button class="option-btn" onclick="food('🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')">Arun kakur Ice cream? 🍨</button>
-        <button class="option-btn" onclick="food('😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')">Sob 😡</button>
+        <button class="option-btn" onclick="food('Fich Fry','Darao anchi OM theke')">Fish Fry Khabi? ??</button>
+        <button class="option-btn" onclick="food('?? Chow and Mau','Yummy noodles ??')">Mix Schezwuan Chow ??</button>
+        <button class="option-btn" onclick="food('?? Burgir','Cholo kheye achi????')">Burgir Khaba ??</button>
+        <button class="option-btn" onclick="food('?? Ice Cream hmmm','Paisa kom ache but tomar jonno sob??')">Arun kakur Ice cream? ??</button>
+        <button class="option-btn" onclick="food('?? Paisar ovab??','Tomar jonno sob kichu bachhu')">Sob ??</button>
     </div>
 </div>
 
-<!-- SCREEN 3 PUNISHMENT -->
 <div id="s3" class="card hidden">
-    <h2>😏 Pick punishments (Ekta ba Duto ba Tinte)</h2>
+    <h2>?? Pick punishments (Ekta ba Duto ba Tinte)</h2>
 
-    <button class="option-btn" onclick="toggle(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
-    <button class="option-btn" onclick="toggle(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
-    <button class="option-btn" onclick="toggle(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
-    <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
-    <button class="option-btn" onclick="toggle(this,'Queen Treatment👑')">Rani Treatment👑</button>
-    <button class="option-btn" onclick="toggle(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
+    <button class="option-btn" onclick="toggle(this,'Puku ???????')">Puku massage ?????????</button>
+    <button class="option-btn" onclick="toggle(this,'Full body Kissu ??')">Full body Kiss ??</button>
+    <button class="option-btn" onclick="toggle(this,'Back Massage 15 min??')">Back Massage ??15 min</button>
+    <button class="option-btn" onclick="toggle(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream ??</button>
+    <button class="option-btn" onclick="toggle(this,'Queen Treatment??')">Rani Treatment??</button>
+    <button class="option-btn" onclick="toggle(this,'Bike chalano sekha???')">Bike chalano sekha???</button>
 
-    <button class="next-btn" onclick="go4()">Next ➡️</button>
+    <button class="next-btn" onclick="go4()">Next ??</button>
 </div>
 
-<!-- SCREEN 4 CUSTOM -->
 <div id="s4" class="card hidden">
-    <h2>💌 Ar kichu bacha 🫠?</h2>
+    <h2>?? Ar kichu bacha ???</h2>
 
     <textarea id="msg" placeholder="lekho ekhane...."></textarea>
 
-    <button class="next-btn" onclick="final()">Magic Card 💖</button>
+    <button class="next-btn" onclick="final()">Magic Card ??</button>
 </div>
 
-<!-- SCREEN 5 CARD -->
 <div id="s5" class="card hidden">
-    <h2>💖 Labuu Card</h2>
+    <h2>?? Labuu Card</h2>
 
     <div id="result"></div>
 </div>
@@ -160,33 +167,20 @@ let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
 
-const yesTexts = ["Yes😇","Chotti?","Pabbi na😜","Thakte pabbina😂","Dhole dekha😏"];
+const yesTexts = ["Yes??","Chotti?","Pabbi na dhotte??","Thakte pabbina??","Dhole dekha??"];
 
 function runAway(e){
+    e.preventDefault();
     const btn = document.getElementById("yesBtn");
-    const box = document.querySelector(".btn-container");
+    
+    // Generates a random position everywhere inside safe boundaries
+    let randomX = Math.floor(Math.random() * 240);
+    let randomY = Math.floor(Math.random() * 60);
 
-    let x = e.touches?.[0]?.clientX || e.clientX;
-    let y = e.touches?.[0]?.clientY || e.clientY;
+    btn.style.left = randomX + "px";
+    btn.style.top = randomY + "px";
 
-    let bx = btn.offsetLeft;
-    let by = btn.offsetTop;
-
-    let dx = bx - x;
-    let dy = by - y;
-
-    let dist = Math.sqrt(dx*dx+dy*dy)||1;
-
-    dx/=dist; dy/=dist;
-
-    let nx = btn.offsetLeft + dx*120;
-    let ny = btn.offsetTop + dy*120;
-
-    btn.style.position="absolute";
-    btn.style.left = Math.max(0, Math.min(250,nx))+"px";
-    btn.style.top = Math.max(0, Math.min(80,ny))+"px";
-
-    btn.innerText = yesTexts[textIndex++%yesTexts.length];
+    btn.innerText = yesTexts[textIndex++ % yesTexts.length];
 }
 
 function go2(){
@@ -226,9 +220,9 @@ function final(){
     s5.classList.remove("hidden");
 
     document.getElementById("result").innerHTML = `
-        🍽️ <b>Food:</b> ${foodChosen}<br><br>
-        😏 <b>Punishments:</b> ${punishments.join(", ") || "None 😇"}<br><br>
-        💌 <b>Message:</b> ${msg || "No message 😭"}
+        ??? <b>Food:</b> ${foodChosen || "Kichu na ??"}<br><br>
+        ?? <b>Punishments:</b> ${punishments.join(", ") || "None ??"}<br><br>
+        ?? <b>Message:</b> ${msg || "No message ??"}
     `;
 }
 </script>
