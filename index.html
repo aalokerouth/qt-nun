@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Amar sona puku ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Amar sona puku ??</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -17,7 +17,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
     margin: 0;
     overflow: hidden;
     position: relative;
@@ -27,6 +28,7 @@ body {
 #boot-screen {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background: #000;
     color: #00ff00;
     font-family: monospace;
@@ -61,6 +63,7 @@ body {
 #login-screen {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background: linear-gradient(135deg,#ffe5ec,#ffc2d1);
     display: flex;
     justify-content: center;
@@ -98,6 +101,7 @@ body {
     width: 100%;
     max-width: 450px;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background: #efeae2;
     display: flex;
     flex-direction: column;
@@ -115,6 +119,7 @@ body {
     gap: 12px;
     font-weight: bold;
     z-index: 50;
+    flex-shrink: 0;
 }
 .wa-avatar {
     width: 40px;
@@ -132,7 +137,7 @@ body {
     font-weight: normal;
 }
 
-/* Chat Engine Window Area - Fixed Padding to lift contents up */
+/* Chat Engine Window Area - Lifted Up Safely for Access Drawer */
 .chat-window {
     flex: 1;
     overflow-y: auto;
@@ -140,7 +145,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-bottom: 220px; 
+    padding-bottom: 30px; 
 }
 
 /* Chat Bubble Mechanics */
@@ -171,29 +176,27 @@ body {
 /* Target Graphic Assets Styling inside Window */
 .inline-food-img {
     width: 100%;
-    max-height: 140px;
+    max-height: 120px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 6px;
     display: block;
 }
 
-/* Bottom Actions Control Drawer - Positioned neatly for access */
+/* Bottom Actions Control Drawer - Fixed and lifted smoothly for phone panels */
 .action-drawer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     background: #f9f9f9;
     padding: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)); /* Accounting for iOS/Android gesture bars */
     border-top: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 45vh;
+    max-height: 40%;
     overflow-y: auto;
     z-index: 100;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
+    flex-shrink: 0;
 }
 
 button {
@@ -266,6 +269,7 @@ button:active { transform: scale(0.95); }
 #secret-letter-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background: linear-gradient(135deg, #1a0005, #4a0010);
     z-index: 2000;
     display: flex;
@@ -337,17 +341,17 @@ button:active { transform: scale(0.95); }
 <!-- SCREEN: AUTH REGISTRATION ACCESS LAYER -->
 <div id="login-screen" class="hidden">
     <div class="login-box">
-        <h2>🔒 pukuOS Secure Login</h2>
+        <h2>?? pukuOS Secure Login</h2>
         <p style="color:#666; font-size:14px;">Enter password to unlock conversation</p>
-        <input type="password" id="passInput" placeholder="Password dekho..." />
-        <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="verifyPassword()">Unlock 🔓</button>
+        <input type="password" id="passInput" placeholder="Lekh 'labu'" />
+        <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="verifyPassword()">Unlock ??</button>
     </div>
 </div>
 
 <!-- CONTAINER: APPLICATION CHAT CONVERSATION FRAME -->
 <div class="phone-container">
     <div class="wa-header">
-        <div class="wa-avatar">❤️</div>
+        <div class="wa-avatar">??</div>
         <div>
             <div>Amar Sona Puku</div>
             <div id="status-indicator" class="wa-status">online</div>
@@ -368,7 +372,7 @@ button:active { transform: scale(0.95); }
 <!-- SCREEN: SECRET LAYER COMPONENT -->
 <div id="secret-letter-overlay" class="hidden">
     <div class="envelope-card">
-        <h2 style="color:#ff4d6d; margin-top:0;">💌 Pure Love Note</h2>
+        <h2 style="color:#ff4d6d; margin-top:0;">?? Pure Love Note</h2>
         <div id="letter-text"></div>
     </div>
 </div>
@@ -377,7 +381,16 @@ button:active { transform: scale(0.95); }
 let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
-const yesTexts = ["Yes😠","Chotti?","Pabbi na dhotte😜","Thakte pabbina😂","Dhole dekha😏"];
+const yesTexts = ["Yes??","Chotti?","Pabbi na dhotte??","Thakte pabbina??","Dhole dekha??"];
+
+// Dynamic Mobile Viewport Resize Handler
+function fixMobileViewport() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', fixMobileViewport);
+window.addEventListener('orientationchange', fixMobileViewport);
+fixMobileViewport();
 
 // High fidelity Audio Synth Sound Engine Layer
 let audioCtx = null;
@@ -436,6 +449,7 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('boot-screen').classList.add('hidden');
                 document.getElementById('login-screen').classList.remove('hidden');
+                fixMobileViewport();
             }, 600);
         }
         fill.style.width = width + '%';
@@ -457,7 +471,7 @@ function verifyPassword() {
 
 // Background Floating System Configurator
 function triggerFloatingHearts() {
-    const symbols = ['❤️', '💖', '✨', '🌸', '💕'];
+    const symbols = ['??', '??', '?', '??', '??'];
     setInterval(() => {
         const heart = document.createElement('div');
         heart.classList.add('heart-bg');
@@ -502,22 +516,26 @@ function startChatSession() {
     updateStatus(true);
     setTimeout(() => {
         updateStatus(false);
-        renderIncomingBubble("🥺 Rag kole achis?");
+        renderIncomingBubble("?? Rag kole achis?");
         
         drawer.innerHTML = `
             <div class="runaway-wrap" id="s1-btns">
-                <button class="reply-btn" style="width:auto; display:inline-block;" onclick="selectRagNo(this)">Ekdm Na😇</button>
-                <button class="btn-no-run" id="yesBtn" style="left:160px; top:0px;" ontouchstart="runAway(event)" onmouseover="runAway(event)">Yes 😈</button>
+                <button class="reply-btn" style="width:auto; display:inline-block;" onclick="selectRagNo(this)">Ekdm Na??</button>
+                <button class="btn-no-run" id="yesBtn" style="left:160px; top:0px;" ontouchstart="runAway(event)" onmouseover="runAway(event)">Yes ??</button>
             </div>
         `;
     }, 1500);
 }
 
+function runawayFix(e) {
+    e.preventDefault();
+}
+
 function runAway(e){
     e.preventDefault();
     const btn = document.getElementById("yesBtn");
-    let randomX = Math.floor(Math.random() * 180);
-    let randomY = Math.floor(Math.random() * 20);
+    let randomX = Math.floor(Math.random() * 150);
+    let randomY = Math.floor(Math.random() * 15);
     btn.style.left = randomX + "px";
     btn.style.top = randomY + "px";
     btn.innerText = yesTexts[textIndex++ % yesTexts.length];
@@ -527,7 +545,7 @@ function runAway(e){
 function selectRagNo(btn) {
     btn.classList.add('bounce-target');
     drawer.innerHTML = "";
-    renderOutgoingBubble("Ekdm Na😇");
+    renderOutgoingBubble("Ekdm Na??");
     
     confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
 
@@ -536,16 +554,17 @@ function selectRagNo(btn) {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            renderIncomingBubble("🍽️ Ki khaba Bachu");
+            renderIncomingBubble("??? Ki khaba Bachu");
             
             // Render Option reply structures with real food image assets
             drawer.innerHTML = `
-                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? 🐟</button>
-                <button class="reply-btn" onclick="selectFood(this, '🍜 Chow and Mau','Yummy noodles 😋')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow 🍜</button>
-                <button class="reply-btn" onclick="selectFood(this, '🍔 Burgir','Cholo kheye achi🍔🔥')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba 🥹</button>
-                <button class="reply-btn" onclick="selectFood(this, '🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? 🍨</button>
-                <button class="reply-btn" onclick="selectFood(this, '😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60">Sob 😡</button>
+                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? ??</button>
+                <button class="reply-btn" onclick="selectFood(this, '?? Chow and Mau','Yummy noodles ??')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow ??</button>
+                <button class="reply-btn" onclick="selectFood(this, '?? Burgir','Cholo kheye achi????')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba ??</button>
+                <button class="reply-btn" onclick="selectFood(this, '?? Ice Cream hmmm','Paisa kom ache but tomar jonno sob??')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? ??</button>
+                <button class="reply-btn" onclick="selectFood(this, '?? Paisar ovab??','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60">Sob ??</button>
             `;
+            win.scrollTop = win.scrollHeight;
         }, 1500);
     }, 3000);
 }
@@ -556,7 +575,6 @@ function selectFood(btn, f, t) {
     foodChosen = f;
     drawer.innerHTML = "";
     
-    // Create clean output text stripping out raw images
     let cleanText = btn.innerText || btn.textContent;
     renderOutgoingBubble(cleanText.trim());
 
@@ -568,19 +586,20 @@ function selectFood(btn, f, t) {
             updateStatus(true);
             setTimeout(() => {
                 updateStatus(false);
-                renderIncomingBubble("😏 Pick punishments (Ekta ba Duto ba Tinte)");
+                renderIncomingBubble("?? Pick punishments (Ekta ba Duto ba Tinte)");
                 
                 drawer.innerHTML = `
                     <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
-                        <button class="reply-btn" onclick="togglePunishment(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Queen Treatment👑')">Rani Treatment👑</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
-                        <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px;" onclick="submitPunishments()">Next ➡️</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Puku ???????')">Puku massage ?????????</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu ??')">Full body Kiss ??</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min??')">Back Massage ??15 min</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream ??</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Queen Treatment??')">Rani Treatment??</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha???')">Bike chalano sekha???</button>
+                        <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px; padding:10px;" onclick="submitPunishments()">Next ??</button>
                     </div>
                 `;
+                win.scrollTop = win.scrollHeight;
             }, 1500);
         }, 3000);
     }, 1000);
@@ -608,12 +627,13 @@ function submitPunishments() {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            renderIncomingBubble("💌 Ar kichu bacha 🫠?");
+            renderIncomingBubble("?? Ar kichu bacha ???");
             
             drawer.innerHTML = `
-                <textarea id="msgInput" placeholder="lekho ekhane...." style="width:100%; height:60px; border-radius:10px; border:2px solid #ffb3c1; padding:8px; resize:none; outline:none;"></textarea>
-                <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="submitCustomMessage()">Magic Card 💖</button>
+                <textarea id="msgInput" placeholder="lekho ekhane...." style="width:100%; height:50px; border-radius:10px; border:2px solid #ffb3c1; padding:8px; resize:none; outline:none; font-size:14px;"></textarea>
+                <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:4px; padding:10px;" onclick="submitCustomMessage()">Magic Card ??</button>
             `;
+            win.scrollTop = win.scrollHeight;
         }, 1500);
     }, 3000);
 }
@@ -629,21 +649,19 @@ function submitCustomMessage() {
         setTimeout(() => {
             updateStatus(false);
             
-            // Output standalone container generation directly appended seamlessly into flow
             const finalCardHTML = `
                 <div id="downloadable-card-area">
-                    <h2 style="margin-top:0; color:#ff4d6d; text-align:center;">💖 Labuu Card</h2>
+                    <h2 style="margin-top:0; color:#ff4d6d; text-align:center;">?? Labuu Card</h2>
                     <div id="result">
-                        <div class="warning-msg">😏 "Ebarer moto chere dilam, porer bar kore dekh"</div>
-                        🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
-                        😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
-                        💌 <b>Message:</b> ${textVal || "No message 😭"}
+                        <div class="warning-msg">?? "Ebarer moto chere dilam, porer bar kore dekh"</div>
+                        ??? <b>Food:</b> ${foodChosen || "Kichu na ??"}<br><br>
+                        ?? <b>Punishments:</b> ${punishments.join(" ar ") || "None ??"}<br><br>
+                        ?? <b>Message:</b> ${textVal || "No message ??"}
                     </div>
                 </div>
             `;
             renderIncomingBubble("", finalCardHTML);
 
-            // Explosive generation burst pattern initialization
             let end = Date.now() + (2 * 1000);
             (function frame() {
               confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffb3c1'] });
@@ -653,11 +671,11 @@ function submitCustomMessage() {
 
             setTimeout(() => { downloadCard(); }, 600);
 
-            // Append final conditional workflow unlock pathways
             drawer.innerHTML = `
-                <button class="fallback-btn" style="background:#28a745; color:white; margin-bottom:5px;" onclick="downloadCard()">Eta patha whatsapp ee 📱</button>
-                <button style="background:#9c27b0; color:white;" onclick="openSecretLetter()">🎁 Open Secret Letter</button>
+                <button class="fallback-btn" style="background:#28a745; color:white; padding:10px;" onclick="downloadCard()">Eta patha whatsapp ee ??</button>
+                <button style="background:#9c27b0; color:white; padding:10px;" onclick="openSecretLetter()">?? Chiecret Letter Tomar jonno </button>
             `;
+            win.scrollTop = win.scrollHeight;
         }, 1500);
     }, 3000);
 }
@@ -676,17 +694,17 @@ function downloadCard() {
 function openSecretLetter() {
     document.getElementById('secret-letter-overlay').classList.remove('hidden');
     triggerFloatingHearts();
+    fixMobileViewport();
     
-    // Continuous synth arpeggio simulation loops safely on tick update window frames
     let bgMusicInterval = setInterval(() => {
         playSound('letter');
     }, 800);
 
     const letterContent = `Dear Puku,
 
-You are the absolute best thing that ever happened to me. Thank you for always being my cute little bachha, my partner in crime, and my favorite person to tease. 
+Tui kotha bolis na, tuk kore palas pocha kothakar. ekdm pocha but you are the best for me. Please orom kotha na bole jasna kosto hoy to re.
 
-Ebarer moto chere dilam, porer bar chotti dhorbo! I love you infinitely! ❤️`;
+Ebarer moto chere dilam, porer bar chotti bokbo! I love you infinitely! ??`;
 
     let txtContainer = document.getElementById('letter-text');
     let idx = 0;
