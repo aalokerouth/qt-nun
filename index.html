@@ -132,7 +132,7 @@ body {
     font-weight: normal;
 }
 
-/* Chat Engine Window Area */
+/* Chat Engine Window Area - Fixed Padding to lift contents up */
 .chat-window {
     flex: 1;
     overflow-y: auto;
@@ -140,7 +140,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-bottom: 100px;
+    padding-bottom: 220px; 
 }
 
 /* Chat Bubble Mechanics */
@@ -175,23 +175,25 @@ body {
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 6px;
+    display: block;
 }
 
-/* Bottom Actions Control Drawer */
+/* Bottom Actions Control Drawer - Positioned neatly for access */
 .action-drawer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #f0f0f0;
-    padding: 12px;
+    background: #f9f9f9;
+    padding: 16px;
     border-top: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    max-height: 50vh;
+    max-height: 45vh;
     overflow-y: auto;
     z-index: 100;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
 }
 
 button {
@@ -224,7 +226,7 @@ button:active { transform: scale(0.95); }
 /* Runaway Target Setup */
 .runaway-wrap {
     position: relative;
-    min-height: 50px;
+    min-height: 70px;
     width: 100%;
 }
 .btn-no-run {
@@ -405,7 +407,6 @@ function playSound(type) {
             gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.08);
             osc.start(); osc.stop(audioCtx.currentTime + 0.08);
         } else if (type === 'letter') {
-            // Arpeggio background note loops for romantic atmosphere simulation
             let notes = [261.63, 329.63, 392.00, 523.25];
             notes.forEach((f, i) => {
                 let o = audioCtx.createOscillator();
@@ -418,17 +419,6 @@ function playSound(type) {
             });
         }
     } catch(e) {}
-}
-
-// Native Speech Synthesis Pipeline Execution
-function speakSentence(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        let msg = new SpeechSynthesisUtterance(text);
-        msg.rate = 0.9;
-        msg.pitch = 1.1;
-        window.speechSynthesis.speak(msg);
-    }
 }
 
 // Startup Sequencer Simulation loop
@@ -546,16 +536,15 @@ function selectRagNo(btn) {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            speakSentence("Ki khaba bacha?");
             renderIncomingBubble("🍽️ Ki khaba Bachu");
             
-            // Render Option reply structures with embedded media graphic assets
+            // Render Option reply structures with real food image assets
             drawer.innerHTML = `
-                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? 🐟</button>
+                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? 🐟</button>
                 <button class="reply-btn" onclick="selectFood(this, '🍜 Chow and Mau','Yummy noodles 😋')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow 🍜</button>
                 <button class="reply-btn" onclick="selectFood(this, '🍔 Burgir','Cholo kheye achi🍔🔥')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba 🥹</button>
-                <button class="reply-btn" onclick="selectFood(this, '🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? 🍨</button>
-                <button class="reply-btn" onclick="selectFood(this, '😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=400&auto=format&fit=crop&q=60">Sob 😡</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? 🍨</button>
+                <button class="reply-btn" onclick="selectFood(this, '😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60">Sob 😡</button>
             `;
         }, 1500);
     }, 3000);
@@ -566,7 +555,10 @@ function selectFood(btn, f, t) {
     btn.classList.add('bounce-target');
     foodChosen = f;
     drawer.innerHTML = "";
-    renderOutgoingBubble(btn.innerText);
+    
+    // Create clean output text stripping out raw images
+    let cleanText = btn.innerText || btn.textContent;
+    renderOutgoingBubble(cleanText.trim());
 
     setTimeout(() => {
         renderIncomingBubble(t);
@@ -584,7 +576,7 @@ function selectFood(btn, f, t) {
                         <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
                         <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
                         <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
-                        <button class="reply-btn" onclick="toggleGram(this,'Queen Treatment👑')">Rani Treatment👑</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Queen Treatment👑')">Rani Treatment👑</button>
                         <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
                         <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px;" onclick="submitPunishments()">Next ➡️</button>
                     </div>
@@ -636,7 +628,6 @@ function submitCustomMessage() {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            speakSentence("Labuu card is ready...");
             
             // Output standalone container generation directly appended seamlessly into flow
             const finalCardHTML = `
@@ -665,7 +656,7 @@ function submitCustomMessage() {
             // Append final conditional workflow unlock pathways
             drawer.innerHTML = `
                 <button class="fallback-btn" style="background:#28a745; color:white; margin-bottom:5px;" onclick="downloadCard()">Eta patha whatsapp ee 📱</button>
-                <button style="background:#9c27b0; color:white; animation: pulse 1.5s infinite;" onclick="openSecretLetter()">🎁 Open Secret Letter</button>
+                <button style="background:#9c27b0; color:white;" onclick="openSecretLetter()">🎁 Open Secret Letter</button>
             `;
         }, 1500);
     }, 3000);
@@ -693,9 +684,9 @@ function openSecretLetter() {
 
     const letterContent = `Dear Puku,
 
-    You are the absolute best thing that ever happened to me. Thank you for always being my cute little bachha, my partner in crime, and my favorite person to tease. 
+You are the absolute best thing that ever happened to me. Thank you for always being my cute little bachha, my partner in crime, and my favorite person to tease. 
 
-    Ebarer moto chere dilam, porer bar chotti dhorbo! I love you infinitely! ❤️`;
+Ebarer moto chere dilam, porer bar chotti dhorbo! I love you infinitely! ❤️`;
 
     let txtContainer = document.getElementById('letter-text');
     let idx = 0;
