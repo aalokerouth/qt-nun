@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>Amar sona puku ??</title>
+<title>Amar sona puku ❤️</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -341,17 +341,17 @@ button:active { transform: scale(0.95); }
 <!-- SCREEN: AUTH REGISTRATION ACCESS LAYER -->
 <div id="login-screen" class="hidden">
     <div class="login-box">
-        <h2>?? pukuOS Secure Login</h2>
+        <h2>🔒 pukuOS Secure Login</h2>
         <p style="color:#666; font-size:14px;">Enter password to unlock conversation</p>
-        <input type="password" id="passInput" placeholder="Lekh 'labu'" />
-        <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="verifyPassword()">Unlock ??</button>
+        <input type="password" id="passInput" placeholder="Ki bolle khusi hoi ami" />
+        <button style="background:#ff4d6d; color:white; border-radius:10px;" onclick="verifyPassword()">Unlock 🔓</button>
     </div>
 </div>
 
 <!-- CONTAINER: APPLICATION CHAT CONVERSATION FRAME -->
 <div class="phone-container">
     <div class="wa-header">
-        <div class="wa-avatar">??</div>
+        <div class="wa-avatar">❤️</div>
         <div>
             <div>Amar Sona Puku</div>
             <div id="status-indicator" class="wa-status">online</div>
@@ -372,7 +372,7 @@ button:active { transform: scale(0.95); }
 <!-- SCREEN: SECRET LAYER COMPONENT -->
 <div id="secret-letter-overlay" class="hidden">
     <div class="envelope-card">
-        <h2 style="color:#ff4d6d; margin-top:0;">?? Pure Love Note</h2>
+        <h2 style="color:#ff4d6d; margin-top:0;">💌 Pure Love Note</h2>
         <div id="letter-text"></div>
     </div>
 </div>
@@ -381,7 +381,7 @@ button:active { transform: scale(0.95); }
 let foodChosen = "";
 let punishments = [];
 let textIndex = 0;
-const yesTexts = ["Yes??","Chotti?","Pabbi na dhotte??","Thakte pabbina??","Dhole dekha??"];
+const yesTexts = ["Yes😠","Chotti?","Pabbi na dhotte😜","Thakte pabbina😂","Dhole dekha😏"];
 
 // Dynamic Mobile Viewport Resize Handler
 function fixMobileViewport() {
@@ -471,7 +471,7 @@ function verifyPassword() {
 
 // Background Floating System Configurator
 function triggerFloatingHearts() {
-    const symbols = ['??', '??', '?', '??', '??'];
+    const symbols = ['❤️', '💖', '✨', '🌸', '💕'];
     setInterval(() => {
         const heart = document.createElement('div');
         heart.classList.add('heart-bg');
@@ -516,12 +516,12 @@ function startChatSession() {
     updateStatus(true);
     setTimeout(() => {
         updateStatus(false);
-        renderIncomingBubble("?? Rag kole achis?");
+        renderIncomingBubble("🥺 Rag kole achis?");
         
         drawer.innerHTML = `
             <div class="runaway-wrap" id="s1-btns">
-                <button class="reply-btn" style="width:auto; display:inline-block;" onclick="selectRagNo(this)">Ekdm Na??</button>
-                <button class="btn-no-run" id="yesBtn" style="left:160px; top:0px;" ontouchstart="runAway(event)" onmouseover="runAway(event)">Yes ??</button>
+                <button class="reply-btn" style="width:auto; display:inline-block;" onclick="selectRagNo(this)">Ekdm Na😇</button>
+                <button class="btn-no-run" id="yesBtn" style="left:160px; top:0px;" ontouchstart="runAway(event)" onmouseover="runAway(event)">Yes 😈</button>
             </div>
         `;
     }, 1500);
@@ -545,7 +545,7 @@ function runAway(e){
 function selectRagNo(btn) {
     btn.classList.add('bounce-target');
     drawer.innerHTML = "";
-    renderOutgoingBubble("Ekdm Na??");
+    renderOutgoingBubble("Ekdm Na😇");
     
     confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
 
@@ -554,15 +554,15 @@ function selectRagNo(btn) {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            renderIncomingBubble("??? Ki khaba Bachu");
+            renderIncomingBubble("🍽️ Ki khaba Bachu");
             
             // Render Option reply structures with real food image assets
             drawer.innerHTML = `
-                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? ??</button>
-                <button class="reply-btn" onclick="selectFood(this, '?? Chow and Mau','Yummy noodles ??')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow ??</button>
-                <button class="reply-btn" onclick="selectFood(this, '?? Burgir','Cholo kheye achi????')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba ??</button>
-                <button class="reply-btn" onclick="selectFood(this, '?? Ice Cream hmmm','Paisa kom ache but tomar jonno sob??')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? ??</button>
-                <button class="reply-btn" onclick="selectFood(this, '?? Paisar ovab??','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60">Sob ??</button>
+                <button class="reply-btn" onclick="selectFood(this, 'Fich Fry','Darao anchi OM theke')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&auto=format&fit=crop&q=60">Fish Fry Khabi? 🐟</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍜 Chow and Mau','Yummy noodles 😋')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&auto=format&fit=crop&q=60">Mix Schezwuan Chow 🍜</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍔 Burgir','Cholo kheye achi🍔🔥')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&auto=format&fit=crop&q=60">Burgir Khaba 🥹</button>
+                <button class="reply-btn" onclick="selectFood(this, '🍨 Ice Cream hmmm','Paisa kom ache but tomar jonno sob🥹')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400&auto=format&fit=crop&q=60">Arun kakur Ice cream? 🍨</button>
+                <button class="reply-btn" onclick="selectFood(this, '😍 Paisar ovab😭','Tomar jonno sob kichu bachhu')"><img class="inline-food-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&auto=format&fit=crop&q=60">Sob 😡</button>
             `;
             win.scrollTop = win.scrollHeight;
         }, 1500);
@@ -586,17 +586,17 @@ function selectFood(btn, f, t) {
             updateStatus(true);
             setTimeout(() => {
                 updateStatus(false);
-                renderIncomingBubble("?? Pick punishments (Ekta ba Duto ba Tinte)");
+                renderIncomingBubble("😏 Pick punishments (Ekta ba Duto ba Tinte)");
                 
                 drawer.innerHTML = `
                     <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
-                        <button class="reply-btn" onclick="togglePunishment(this,'Puku ???????')">Puku massage ?????????</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu ??')">Full body Kiss ??</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min??')">Back Massage ??15 min</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream ??</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Queen Treatment??')">Rani Treatment??</button>
-                        <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha???')">Bike chalano sekha???</button>
-                        <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px; padding:10px;" onclick="submitPunishments()">Next ??</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Puku 💆🏻‍♀️')">Puku massage 💆🏻‍♀️💖</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Full body Kissu 😘')">Full body Kiss 😘</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Back Massage 15 min💆')">Back Massage 💆15 min</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Ghurte giye Ice cream khawa')">Continuous Ice Cream 🍦</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Queen Treatment👑')">Rani Treatment👑</button>
+                        <button class="reply-btn" onclick="togglePunishment(this,'Bike chalano sekha🏍️')">Bike chalano sekha🏍️</button>
+                        <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:5px; padding:10px;" onclick="submitPunishments()">Next ➡️</button>
                     </div>
                 `;
                 win.scrollTop = win.scrollHeight;
@@ -627,11 +627,11 @@ function submitPunishments() {
         updateStatus(true);
         setTimeout(() => {
             updateStatus(false);
-            renderIncomingBubble("?? Ar kichu bacha ???");
+            renderIncomingBubble("💌 Ar kichu bacha 🫠?");
             
             drawer.innerHTML = `
                 <textarea id="msgInput" placeholder="lekho ekhane...." style="width:100%; height:50px; border-radius:10px; border:2px solid #ffb3c1; padding:8px; resize:none; outline:none; font-size:14px;"></textarea>
-                <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:4px; padding:10px;" onclick="submitCustomMessage()">Magic Card ??</button>
+                <button style="background:#ff4d6d; color:white; border-radius:10px; margin-top:4px; padding:10px;" onclick="submitCustomMessage()">Magic Card 💖</button>
             `;
             win.scrollTop = win.scrollHeight;
         }, 1500);
@@ -641,7 +641,7 @@ function submitPunishments() {
 function submitCustomMessage() {
     let textVal = document.getElementById('msgInput').value;
     drawer.innerHTML = "";
-    renderOutgoingBubble(textVal || "No custom text added");
+    renderOutgoingBubble(textVal || "Kichu likhli na?🥺");
 
     // 3 Second Tab Transition Delay
     setTimeout(() => {
@@ -651,12 +651,12 @@ function submitCustomMessage() {
             
             const finalCardHTML = `
                 <div id="downloadable-card-area">
-                    <h2 style="margin-top:0; color:#ff4d6d; text-align:center;">?? Labuu Card</h2>
+                    <h2 style="margin-top:0; color:#ff4d6d; text-align:center;">💖 Labuu Card</h2>
                     <div id="result">
-                        <div class="warning-msg">?? "Ebarer moto chere dilam, porer bar kore dekh"</div>
-                        ??? <b>Food:</b> ${foodChosen || "Kichu na ??"}<br><br>
-                        ?? <b>Punishments:</b> ${punishments.join(" ar ") || "None ??"}<br><br>
-                        ?? <b>Message:</b> ${textVal || "No message ??"}
+                        <div class="warning-msg">😏 "Ebarer moto chere dilam, porer bar kore dekh"</div>
+                        🍽️ <b>Food:</b> ${foodChosen || "Kichu na 🥺"}<br><br>
+                        😏 <b>Punishments:</b> ${punishments.join(" ar ") || "None 😇"}<br><br>
+                        💌 <b>Message:</b> ${textVal || "No message 😭"}
                     </div>
                 </div>
             `;
@@ -672,8 +672,8 @@ function submitCustomMessage() {
             setTimeout(() => { downloadCard(); }, 600);
 
             drawer.innerHTML = `
-                <button class="fallback-btn" style="background:#28a745; color:white; padding:10px;" onclick="downloadCard()">Eta patha whatsapp ee ??</button>
-                <button style="background:#9c27b0; color:white; padding:10px;" onclick="openSecretLetter()">?? Chiecret Letter Tomar jonno </button>
+                <button class="fallback-btn" style="background:#28a745; color:white; padding:10px;" onclick="downloadCard()">Eta patha whatsapp ee 📱</button>
+                <button style="background:#9c27b0; color:white; padding:10px;" onclick="openSecretLetter()">🎁 Chiecret Letter Tomar jonno </button>
             `;
             win.scrollTop = win.scrollHeight;
         }, 1500);
@@ -704,7 +704,7 @@ function openSecretLetter() {
 
 Tui kotha bolis na, tuk kore palas pocha kothakar. ekdm pocha but you are the best for me. Please orom kotha na bole jasna kosto hoy to re.
 
-Ebarer moto chere dilam, porer bar chotti bokbo! I love you infinitely! ??`;
+Ebarer moto chere dilam, porer bar chotti bokbo! I love you infinitely! ❤️`;
 
     let txtContainer = document.getElementById('letter-text');
     let idx = 0;
